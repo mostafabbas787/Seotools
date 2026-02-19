@@ -998,7 +998,7 @@ function analyzeReadability() {
 
     function countSyllables(word) {
         word = word.toLowerCase().replace(/[^a-z]/g, '');
-        if (word.length === 0) return 1;
+        if (word.length === 0) return 0;
         const matches = word.match(/[aeiouy]+/g);
         return matches ? matches.length : 1;
     }
