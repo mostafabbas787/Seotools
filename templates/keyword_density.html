@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Keyword Density Checker – SEO Tools{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>📊 Keyword Density Checker</h1>
+    <p>Paste your content to see which keywords appear most frequently.</p>
+</section>
+
+<div class="content-card">
+    <form method="post" class="tool-form">
+        <div class="form-group">
+            <label for="text">Your Content</label>
+            <textarea id="text" name="text" rows="10" placeholder="Paste your article or page content here…" required>{{ request.form.get('text', '') }}</textarea>
+        </div>
+        <button type="submit" class="btn">Analyze Keywords</button>
+    </form>
+</div>
+
+{% if result %}
+<div class="content-card">
+    <h2>Results <span class="badge">{{ result.total_words }} words</span></h2>
+
+    {% if result.single %}
+    <h3>Top Single Keywords</h3>
+    <table class="result-table">
+        <thead><tr><th>#</th><th>Keyword</th><th>Count</th><th>Density</th></tr></thead>
+        <tbody>
+        {% for kw in result.single %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ kw.word }}</td>
+            <td>{{ kw.count }}</td>
+            <td>{{ kw.density }}%</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if result.bigrams %}
+    <h3>Top Two-Word Phrases</h3>
+    <table class="result-table">
+        <thead><tr><th>#</th><th>Phrase</th><th>Count</th><th>Density</th></tr></thead>
+        <tbody>
+        {% for kw in result.bigrams %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ kw.word }}</td>
+            <td>{{ kw.count }}</td>
+            <td>{{ kw.density }}%</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

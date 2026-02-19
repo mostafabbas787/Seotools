@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Meta Tag Generator – SEO Tools{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>🏷️ Meta Tag Generator</h1>
+    <p>Fill in the fields below to generate optimized HTML meta tags.</p>
+</section>
+
+<div class="content-card">
+    <form method="post" class="tool-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="title">Page Title</label>
+                <input type="text" id="title" name="title" placeholder="My Awesome Page" maxlength="70">
+                <small>Recommended: 50–60 characters</small>
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author" placeholder="John Doe">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Meta Description</label>
+            <textarea id="description" name="description" rows="3" placeholder="A brief description of your page…" maxlength="170"></textarea>
+            <small>Recommended: 120–160 characters</small>
+        </div>
+
+        <div class="form-group">
+            <label for="keywords">Keywords (comma-separated)</label>
+            <input type="text" id="keywords" name="keywords" placeholder="seo, tools, meta tags">
+        </div>
+
+        <div class="form-group">
+            <label for="robots">Robots Directive</label>
+            <select id="robots" name="robots">
+                <option value="index, follow">index, follow</option>
+                <option value="noindex, follow">noindex, follow</option>
+                <option value="index, nofollow">index, nofollow</option>
+                <option value="noindex, nofollow">noindex, nofollow</option>
+            </select>
+        </div>
+
+        <h3>Open Graph / Social</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="og_title">OG Title (defaults to page title)</label>
+                <input type="text" id="og_title" name="og_title" placeholder="Same as title if empty">
+            </div>
+            <div class="form-group">
+                <label for="og_url">OG URL</label>
+                <input type="text" id="og_url" name="og_url" placeholder="https://example.com/page">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="og_description">OG Description (defaults to meta description)</label>
+            <textarea id="og_description" name="og_description" rows="2" placeholder="Same as description if empty"></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="og_image">OG Image URL</label>
+                <input type="text" id="og_image" name="og_image" placeholder="https://example.com/image.jpg">
+            </div>
+            <div class="form-group">
+                <label for="twitter_card">Twitter Card Type</label>
+                <select id="twitter_card" name="twitter_card">
+                    <option value="summary">summary</option>
+                    <option value="summary_large_image">summary_large_image</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Generate Meta Tags</button>
+    </form>
+</div>
+
+{% if generated %}
+<div class="content-card">
+    <h2>Generated Meta Tags</h2>
+    <p>Copy the code below and paste it inside the <code>&lt;head&gt;</code> section of your HTML.</p>
+    <div class="code-output">
+        <button class="btn btn-sm copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>{{ generated }}</code></pre>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

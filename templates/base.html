@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SEO Tools{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="/" class="logo">🔍 SEO&nbsp;Tools</a>
+            <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Analyzers ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/meta-analyzer">Meta Tag Analyzer</a></li>
+                        <li><a href="/keyword-density">Keyword Density</a></li>
+                        <li><a href="/word-counter">Word Counter</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Generators ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/meta-generator">Meta Tag Generator</a></li>
+                        <li><a href="/og-generator">Open Graph Generator</a></li>
+                        <li><a href="/robots-generator">Robots.txt Generator</a></li>
+                        <li><a href="/sitemap-generator">Sitemap Generator</a></li>
+                        <li><a href="/slug-generator">Slug Generator</a></li>
+                    </ul>
+                </li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SEO Tools. Built for better search visibility.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
