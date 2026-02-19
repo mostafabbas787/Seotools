@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Meta Tag Analyzer – SEO Tools{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>🔎 Meta Tag Analyzer</h1>
+    <p>Enter a URL to analyze its meta tags, headings, and SEO health.</p>
+</section>
+
+<div class="content-card">
+    <form method="post" class="tool-form">
+        <div class="form-group">
+            <label for="url">Website URL</label>
+            <input type="text" id="url" name="url" placeholder="https://example.com" value="{{ url }}" required>
+        </div>
+        <button type="submit" class="btn">Analyze</button>
+    </form>
+</div>
+
+{% if error %}
+<div class="alert alert-error">{{ error }}</div>
+{% endif %}
+
+{% if result %}
+<div class="content-card">
+    <h2>Results for <code>{{ result.url }}</code></h2>
+
+    {% if result.issues %}
+    <div class="issues-section">
+        <h3>SEO Issues</h3>
+        {% for issue in result.issues %}
+        <div class="alert alert-{{ issue.severity }}">
+            <strong>{{ issue.severity | upper }}:</strong> {{ issue.message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <table class="result-table">
+        <tr><th>Title</th><td>{{ result.title or '—' }} <span class="badge">{{ result.title_length }} chars</span></td></tr>
+        <tr><th>Meta Description</th><td>{{ result.meta_description or '—' }} <span class="badge">{{ result.meta_description_length }} chars</span></td></tr>
+        <tr><th>Meta Keywords</th><td>{{ result.meta_keywords or '—' }}</td></tr>
+        <tr><th>Canonical URL</th><td>{{ result.canonical or '—' }}</td></tr>
+        <tr><th>Viewport</th><td>{{ result.viewport or '—' }}</td></tr>
+        <tr><th>Charset</th><td>{{ result.charset or '—' }}</td></tr>
+        <tr><th>Images</th><td>{{ result.img_total }} total, {{ result.img_no_alt }} missing alt</td></tr>
+    </table>
+
+    {% if result.h1_tags %}
+    <h3>H1 Tags ({{ result.h1_tags | length }})</h3>
+    <ul>{% for h in result.h1_tags %}<li>{{ h }}</li>{% endfor %}</ul>
+    {% endif %}
+
+    {% if result.h2_tags %}
+    <h3>H2 Tags ({{ result.h2_tags | length }})</h3>
+    <ul>{% for h in result.h2_tags %}<li>{{ h }}</li>{% endfor %}</ul>
+    {% endif %}
+
+    {% if result.og_tags %}
+    <h3>Open Graph Tags</h3>
+    <table class="result-table">
+        {% for k, v in result.og_tags.items() %}
+        <tr><th>{{ k }}</th><td>{{ v }}</td></tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if result.twitter_tags %}
+    <h3>Twitter Card Tags</h3>
+    <table class="result-table">
+        {% for k, v in result.twitter_tags.items() %}
+        <tr><th>{{ k }}</th><td>{{ v }}</td></tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

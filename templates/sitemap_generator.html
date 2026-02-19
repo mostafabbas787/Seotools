@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Sitemap XML Generator – SEO Tools{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>🗺️ Sitemap XML Generator</h1>
+    <p>Enter your URLs to generate a valid XML sitemap.</p>
+</section>
+
+<div class="content-card">
+    <form method="post" class="tool-form">
+        <div class="form-group">
+            <label for="urls">URLs (one per line)</label>
+            <textarea id="urls" name="urls" rows="8" placeholder="https://example.com/&#10;https://example.com/about&#10;https://example.com/contact" required>{{ request.form.get('urls', '') }}</textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="changefreq">Change Frequency</label>
+                <select id="changefreq" name="changefreq">
+                    <option value="always">always</option>
+                    <option value="hourly">hourly</option>
+                    <option value="daily">daily</option>
+                    <option value="weekly" selected>weekly</option>
+                    <option value="monthly">monthly</option>
+                    <option value="yearly">yearly</option>
+                    <option value="never">never</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority">
+                    <option value="1.0">1.0</option>
+                    <option value="0.9">0.9</option>
+                    <option value="0.8" selected>0.8</option>
+                    <option value="0.7">0.7</option>
+                    <option value="0.6">0.6</option>
+                    <option value="0.5">0.5</option>
+                    <option value="0.4">0.4</option>
+                    <option value="0.3">0.3</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Generate Sitemap</button>
+    </form>
+</div>
+
+{% if generated %}
+<div class="content-card">
+    <h2>Generated Sitemap XML</h2>
+    <div class="code-output">
+        <button class="btn btn-sm copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>{{ generated }}</code></pre>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

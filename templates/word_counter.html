@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Word Counter – SEO Tools{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>📝 Word Counter</h1>
+    <p>Count words, characters, sentences, and estimate reading time.</p>
+</section>
+
+<div class="content-card">
+    <form method="post" class="tool-form">
+        <div class="form-group">
+            <label for="text">Your Text</label>
+            <textarea id="text" name="text" rows="10" placeholder="Type or paste your text here…" required>{{ request.form.get('text', '') }}</textarea>
+        </div>
+        <button type="submit" class="btn">Count</button>
+    </form>
+</div>
+
+{% if result %}
+<div class="content-card">
+    <h2>Results</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">{{ result.words }}</div>
+            <div class="stat-label">Words</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ result.characters }}</div>
+            <div class="stat-label">Characters</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ result.characters_no_spaces }}</div>
+            <div class="stat-label">Characters (no spaces)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ result.sentences }}</div>
+            <div class="stat-label">Sentences</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ result.paragraphs }}</div>
+            <div class="stat-label">Paragraphs</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ result.avg_word_length }}</div>
+            <div class="stat-label">Avg Word Length</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">{{ result.reading_time_min }} min</div>
+            <div class="stat-label">Reading Time</div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

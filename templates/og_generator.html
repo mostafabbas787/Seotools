@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Open Graph Generator – SEO Tools{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>📣 Open Graph Tag Generator</h1>
+    <p>Generate Open Graph meta tags for beautiful social media previews.</p>
+</section>
+
+<div class="content-card">
+    <form method="post" class="tool-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="og_type">OG Type</label>
+                <select id="og_type" name="og_type">
+                    <option value="website">website</option>
+                    <option value="article">article</option>
+                    <option value="product">product</option>
+                    <option value="profile">profile</option>
+                    <option value="video.movie">video.movie</option>
+                    <option value="music.song">music.song</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="locale">Locale</label>
+                <input type="text" id="locale" name="locale" value="en_US" placeholder="en_US">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="My Page Title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3" placeholder="A short description of the content…"></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input type="text" id="url" name="url" placeholder="https://example.com/page">
+            </div>
+            <div class="form-group">
+                <label for="site_name">Site Name</label>
+                <input type="text" id="site_name" name="site_name" placeholder="My Website">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image URL</label>
+            <input type="text" id="image" name="image" placeholder="https://example.com/image.jpg">
+            <small>Recommended size: 1200 × 630 px</small>
+        </div>
+
+        <button type="submit" class="btn">Generate OG Tags</button>
+    </form>
+</div>
+
+{% if generated %}
+<div class="content-card">
+    <h2>Generated Open Graph Tags</h2>
+    <div class="code-output">
+        <button class="btn btn-sm copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>{{ generated }}</code></pre>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}URL Slug Generator – SEO Tools{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h1>🔗 URL Slug Generator</h1>
+    <p>Convert any text into a clean, SEO-friendly URL slug.</p>
+</section>
+
+<div class="content-card">
+    <form method="post" class="tool-form">
+        <div class="form-group">
+            <label for="text">Text to Slugify</label>
+            <input type="text" id="text" name="text" placeholder="My Blog Post Title!" value="{{ request.form.get('text', '') }}" required>
+        </div>
+        <button type="submit" class="btn">Generate Slug</button>
+    </form>
+</div>
+
+{% if result is not none %}
+<div class="content-card">
+    <h2>Generated Slug</h2>
+    <div class="code-output">
+        <button class="btn btn-sm copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>{{ result }}</code></pre>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
