@@ -9,6 +9,7 @@ from app import (
     _build_sitemap,
     _check_issues,
     _esc,
+    _fetch_url,
     _keyword_density,
     _normalize_url,
     _slugify,
@@ -33,6 +34,20 @@ class TestEsc:
 
     def test_plain_text_unchanged(self):
         assert _esc("hello world") == "hello world"
+
+
+class TestFetchUrlSsrf:
+    def test_blocks_localhost(self):
+        with pytest.raises(Exception):
+            _fetch_url("http://localhost/secret")
+
+    def test_blocks_127(self):
+        with pytest.raises(Exception):
+            _fetch_url("http://127.0.0.1/secret")
+
+    def test_blocks_non_http_scheme(self):
+        with pytest.raises(Exception):
+            _fetch_url("file:///etc/passwd")
 
 
 class TestNormalizeUrl:

@@ -1,6 +1,8 @@
 """SEO Tools - A professional web application for SEO utilities."""
 
+import ipaddress
 import re
+import socket
 import string
 from collections import Counter
 from urllib.parse import urlparse
@@ -18,8 +20,32 @@ app = Flask(__name__)
 # Helpers
 # ---------------------------------------------------------------------------
 
+_BLOCKED_HOSTS = {"localhost", "127.0.0.1", "0.0.0.0", "[::1]"}
+
+
 def _fetch_url(url: str, timeout: int = 10) -> requests.Response:
-    """Fetch a URL with a reasonable timeout and user-agent."""
+    """Fetch a URL with a reasonable timeout and user-agent.
+
+    Only http/https schemes are allowed and requests to localhost or
+    private-range hosts are blocked to prevent SSRF.
+    """
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        raise requests.URLRequired("Only http and https URLs are supported.")
+    hostname = (parsed.hostname or "").lower()
+    if hostname in _BLOCKED_HOSTS or hostname.endswith(".local"):
+        raise requests.URLRequired("Requests to internal hosts are not allowed.")
+    # Resolve hostname and reject private/reserved IPs
+    try:
+        addr_info = socket.getaddrinfo(hostname, parsed.port or 443)
+        for family, _type, _proto, _canon, sockaddr in addr_info:
+            ip = ipaddress.ip_address(sockaddr[0])
+            if ip.is_private or ip.is_loopback or ip.is_reserved or ip.is_link_local:
+                raise requests.URLRequired(
+                    "Requests to private/internal IPs are not allowed."
+                )
+    except socket.gaierror as exc:
+        raise requests.URLRequired(f"Could not resolve host: {exc}") from exc
     headers = {
         "User-Agent": (
             "Mozilla/5.0 (compatible; SEOToolsBot/1.0; "
@@ -466,4 +492,4 @@ def _slugify(text: str) -> str:
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
