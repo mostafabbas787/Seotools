@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online SEO tools collection with 50+ tools for content optimization, keyword research, link analysis, and more. Improve your website's search engine rankings.">
+    <meta name="keywords" content="SEO tools, keyword research, meta tag generator, backlink checker, SEO analyzer, free SEO tools">
+    <meta name="author" content="SEO Tools">
+    <meta property="og:title" content="50+ Free Online SEO Tools - Complete SEO Toolkit">
+    <meta property="og:description" content="Comprehensive collection of free SEO tools to optimize your website and improve search rankings.">
+    <meta property="og:type" content="website">
+    <title>50+ Free Online SEO Tools - Complete SEO Toolkit</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <i class="fas fa-tools"></i>
+                    <h1>SEO Tools Hub</h1>
+                </div>
+                <div class="nav-controls">
+                    <button id="darkModeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>50+ Free Online SEO Tools</h2>
+            <p>Comprehensive toolkit to analyze, optimize, and boost your website's search engine performance</p>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="toolSearch" placeholder="Search for SEO tools..." aria-label="Search tools">
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Filter -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">All Tools</button>
+                <button class="filter-btn" data-category="text">Text & Content</button>
+                <button class="filter-btn" data-category="keyword">Keywords & Meta</button>
+                <button class="filter-btn" data-category="link">Links & URLs</button>
+                <button class="filter-btn" data-category="image">Images & Media</button>
+                <button class="filter-btn" data-category="technical">Technical SEO</button>
+                <button class="filter-btn" data-category="social">Social & Schema</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <main class="tools-section">
+        <div class="container">
+            <div class="tools-grid" id="toolsGrid">
+                <!-- Text & Content Analysis Tools (10 tools) -->
+                <div class="tool-card" data-category="text" data-tool="word-counter">
+                    <div class="tool-header">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Word Counter</h3>
+                    </div>
+                    <p>Count words, characters, sentences, and paragraphs in your text</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="keyword-density">
+                    <div class="tool-header">
+                        <i class="fas fa-percent"></i>
+                        <h3>Keyword Density Checker</h3>
+                    </div>
+                    <p>Analyze keyword frequency and density in your content</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="readability">
+                    <div class="tool-header">
+                        <i class="fas fa-book-reader"></i>
+                        <h3>Readability Analyzer</h3>
+                    </div>
+                    <p>Check content readability score and grade level</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="plagiarism">
+                    <div class="tool-header">
+                        <i class="fas fa-copy"></i>
+                        <h3>Plagiarism Checker</h3>
+                    </div>
+                    <p>Detect duplicate content and ensure originality</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="grammar">
+                    <div class="tool-header">
+                        <i class="fas fa-spell-check"></i>
+                        <h3>Grammar Checker</h3>
+                    </div>
+                    <p>Check for grammar and spelling errors</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="article-rewriter">
+                    <div class="tool-header">
+                        <i class="fas fa-sync-alt"></i>
+                        <h3>Article Rewriter</h3>
+                    </div>
+                    <p>Rewrite content while maintaining meaning</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="title-generator">
+                    <div class="tool-header">
+                        <i class="fas fa-heading"></i>
+                        <h3>SEO Title Generator</h3>
+                    </div>
+                    <p>Generate optimized titles for your content</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="meta-description">
+                    <div class="tool-header">
+                        <i class="fas fa-align-left"></i>
+                        <h3>Meta Description Generator</h3>
+                    </div>
+                    <p>Create compelling meta descriptions for pages</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="text-case">
+                    <div class="tool-header">
+                        <i class="fas fa-text-height"></i>
+                        <h3>Text Case Converter</h3>
+                    </div>
+                    <p>Convert text between different case formats</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="lorem-ipsum">
+                    <div class="tool-header">
+                        <i class="fas fa-paragraph"></i>
+                        <h3>Lorem Ipsum Generator</h3>
+                    </div>
+                    <p>Generate placeholder text for your designs</p>
+                </div>
+
+                <!-- Keywords & Meta Tools (10 tools) -->
+                <div class="tool-card" data-category="keyword" data-tool="keyword-research">
+                    <div class="tool-header">
+                        <i class="fas fa-search"></i>
+                        <h3>Keyword Research Tool</h3>
+                    </div>
+                    <p>Find relevant keywords for your niche</p>
+                </div>
+
+                <div class="tool-card" data-category="keyword" data-tool="keyword-position">
+                    <div class="tool-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Keyword Position Checker</h3>
+                    </div>
+                    <p>Track your keyword rankings in search results</p>
+                </div>
+
+                <div class="tool-card" data-category="keyword" data-tool="keyword-difficulty">
+                    <div class="tool-header">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Keyword Difficulty Checker</h3>
+                    </div>
+                    <p>Analyze keyword competition level</p>
+                </div>
+
+                <div class="tool-card" data-category="keyword" data-tool="long-tail">
+                    <div class="tool-header">
+                        <i class="fas fa-list-ul"></i>
+                        <h3>Long Tail Keyword Finder</h3>
+                    </div>
+                    <p>Discover long-tail keyword opportunities</p>
+                </div>
+
+                <div class="tool-card" data-category="keyword" data-tool="meta-tags">
+                    <div class="tool-header">
+                        <i class="fas fa-tags"></i>
+                        <h3>Meta Tags Generator</h3>
+                    </div>
+                    <p>Create complete meta tags for your pages</p>
+                </div>
+
+                <div class="tool-card" data-category="keyword" data-tool="robots-txt">
+                    <div class="tool-header">
+                        <i class="fas fa-robot"></i>
+                        <h3>Robots.txt Generator</h3>
+                    </div>
+                    <p>Generate robots.txt file for your website</p>
+                </div>
+
+                <div class="tool-card" data-category="keyword" data-tool="sitemap">
+                    <div class="tool-header">
+                        <i class="fas fa-sitemap"></i>
+                        <h3>XML Sitemap Generator</h3>
+                    </div>
+                    <p>Create XML sitemap for search engines</p>
+                </div>
+
+                <div class="tool-card" data-category="keyword" data-tool="htaccess">
+                    <div class="tool-header">
+                        <i class="fas fa-file-code"></i>
+                        <h3>.htaccess Generator</h3>
+                    </div>
+                    <p>Generate .htaccess redirects and rules</p>
+                </div>
+
+                <div class="tool-card" data-category="keyword" data-tool="canonical">
+                    <div class="tool-header">
+                        <i class="fas fa-link"></i>
+                        <h3>Canonical Tag Generator</h3>
+                    </div>
+                    <p>Create canonical tags to avoid duplicate content</p>
+                </div>
+
+                <div class="tool-card" data-category="keyword" data-tool="hreflang">
+                    <div class="tool-header">
+                        <i class="fas fa-globe"></i>
+                        <h3>Hreflang Tag Generator</h3>
+                    </div>
+                    <p>Generate hreflang tags for multilingual sites</p>
+                </div>
+
+                <!-- Links & URL Tools (10 tools) -->
+                <div class="tool-card" data-category="link" data-tool="backlink-checker">
+                    <div class="tool-header">
+                        <i class="fas fa-link"></i>
+                        <h3>Backlink Checker</h3>
+                    </div>
+                    <p>Analyze backlinks pointing to your website</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="broken-link">
+                    <div class="tool-header">
+                        <i class="fas fa-unlink"></i>
+                        <h3>Broken Link Checker</h3>
+                    </div>
+                    <p>Find and fix broken links on your site</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="url-rewriter">
+                    <div class="tool-header">
+                        <i class="fas fa-pen"></i>
+                        <h3>URL Rewriter</h3>
+                    </div>
+                    <p>Create SEO-friendly URLs</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="redirect-checker">
+                    <div class="tool-header">
+                        <i class="fas fa-directions"></i>
+                        <h3>Redirect Checker</h3>
+                    </div>
+                    <p>Check HTTP redirects and redirect chains</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="domain-authority">
+                    <div class="tool-header">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Domain Authority Checker</h3>
+                    </div>
+                    <p>Check domain authority and page authority</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="url-encoder">
+                    <div class="tool-header">
+                        <i class="fas fa-code"></i>
+                        <h3>URL Encoder/Decoder</h3>
+                    </div>
+                    <p>Encode or decode URLs for web use</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="www-redirect">
+                    <div class="tool-header">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>WWW Redirect Checker</h3>
+                    </div>
+                    <p>Check www to non-www redirects</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="link-analyzer">
+                    <div class="tool-header">
+                        <i class="fas fa-microscope"></i>
+                        <h3>Link Analyzer</h3>
+                    </div>
+                    <p>Analyze internal and external links</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="anchor-text">
+                    <div class="tool-header">
+                        <i class="fas fa-anchor"></i>
+                        <h3>Anchor Text Analyzer</h3>
+                    </div>
+                    <p>Analyze anchor text distribution</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="nofollow-checker">
+                    <div class="tool-header">
+                        <i class="fas fa-eye-slash"></i>
+                        <h3>Nofollow Link Checker</h3>
+                    </div>
+                    <p>Identify nofollow and dofollow links</p>
+                </div>
+
+                <!-- Images & Media Tools (5 tools) -->
+                <div class="tool-card" data-category="image" data-tool="image-alt">
+                    <div class="tool-header">
+                        <i class="fas fa-image"></i>
+                        <h3>Image Alt Text Generator</h3>
+                    </div>
+                    <p>Generate SEO-friendly alt text for images</p>
+                </div>
+
+                <div class="tool-card" data-category="image" data-tool="image-optimizer">
+                    <div class="tool-header">
+                        <i class="fas fa-compress"></i>
+                        <h3>Image Optimizer</h3>
+                    </div>
+                    <p>Compress images for faster loading</p>
+                </div>
+
+                <div class="tool-card" data-category="image" data-tool="favicon-generator">
+                    <div class="tool-header">
+                        <i class="fas fa-star"></i>
+                        <h3>Favicon Generator</h3>
+                    </div>
+                    <p>Create favicon for your website</p>
+                </div>
+
+                <div class="tool-card" data-category="image" data-tool="og-image">
+                    <div class="tool-header">
+                        <i class="fas fa-share-alt"></i>
+                        <h3>Open Graph Image Generator</h3>
+                    </div>
+                    <p>Create social sharing images</p>
+                </div>
+
+                <div class="tool-card" data-category="image" data-tool="lazy-load">
+                    <div class="tool-header">
+                        <i class="fas fa-hourglass-half"></i>
+                        <h3>Lazy Load Generator</h3>
+                    </div>
+                    <p>Generate lazy loading code for images</p>
+                </div>
+
+                <!-- Performance & Technical SEO Tools (10 tools) -->
+                <div class="tool-card" data-category="technical" data-tool="page-speed">
+                    <div class="tool-header">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h3>Page Speed Analyzer</h3>
+                    </div>
+                    <p>Test website loading speed and performance</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="mobile-friendly">
+                    <div class="tool-header">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile-Friendly Test</h3>
+                    </div>
+                    <p>Check if your site is mobile-optimized</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="ssl-checker">
+                    <div class="tool-header">
+                        <i class="fas fa-lock"></i>
+                        <h3>SSL Certificate Checker</h3>
+                    </div>
+                    <p>Verify SSL certificate and HTTPS setup</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="structured-data">
+                    <div class="tool-header">
+                        <i class="fas fa-database"></i>
+                        <h3>Structured Data Validator</h3>
+                    </div>
+                    <p>Validate schema markup and structured data</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="server-status">
+                    <div class="tool-header">
+                        <i class="fas fa-server"></i>
+                        <h3>Server Status Checker</h3>
+                    </div>
+                    <p>Check website uptime and server status</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="dns-lookup">
+                    <div class="tool-header">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>DNS Lookup Tool</h3>
+                    </div>
+                    <p>Lookup DNS records for any domain</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="whois">
+                    <div class="tool-header">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>WHOIS Lookup</h3>
+                    </div>
+                    <p>Get domain registration information</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="ip-location">
+                    <div class="tool-header">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>IP Location Finder</h3>
+                    </div>
+                    <p>Find geographic location of IP address</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="minify-css">
+                    <div class="tool-header">
+                        <i class="fas fa-file-code"></i>
+                        <h3>CSS Minifier</h3>
+                    </div>
+                    <p>Minify CSS code for better performance</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="minify-js">
+                    <div class="tool-header">
+                        <i class="fas fa-code"></i>
+                        <h3>JavaScript Minifier</h3>
+                    </div>
+                    <p>Minify JavaScript code for faster loading</p>
+                </div>
+
+                <!-- Social & Schema Tools (5 tools) -->
+                <div class="tool-card" data-category="social" data-tool="twitter-card">
+                    <div class="tool-header">
+                        <i class="fab fa-twitter"></i>
+                        <h3>Twitter Card Generator</h3>
+                    </div>
+                    <p>Create Twitter card meta tags</p>
+                </div>
+
+                <div class="tool-card" data-category="social" data-tool="facebook-og">
+                    <div class="tool-header">
+                        <i class="fab fa-facebook"></i>
+                        <h3>Facebook Open Graph Generator</h3>
+                    </div>
+                    <p>Generate Facebook Open Graph tags</p>
+                </div>
+
+                <div class="tool-card" data-category="social" data-tool="schema-markup">
+                    <div class="tool-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Schema Markup Generator</h3>
+                    </div>
+                    <p>Create JSON-LD schema markup</p>
+                </div>
+
+                <div class="tool-card" data-category="social" data-tool="rich-snippets">
+                    <div class="tool-header">
+                        <i class="fas fa-star"></i>
+                        <h3>Rich Snippets Tester</h3>
+                    </div>
+                    <p>Test and preview rich snippets</p>
+                </div>
+
+                <div class="tool-card" data-category="social" data-tool="breadcrumb">
+                    <div class="tool-header">
+                        <i class="fas fa-chevron-right"></i>
+                        <h3>Breadcrumb Schema Generator</h3>
+                    </div>
+                    <p>Generate breadcrumb schema markup</p>
+                </div>
+
+                <!-- Additional 5 Essential Tools -->
+                <div class="tool-card" data-category="technical" data-tool="headers-checker">
+                    <div class="tool-header">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>HTTP Headers Checker</h3>
+                    </div>
+                    <p>Analyze HTTP response headers</p>
+                </div>
+
+                <div class="tool-card" data-category="text" data-tool="html-encoder">
+                    <div class="tool-header">
+                        <i class="fas fa-code"></i>
+                        <h3>HTML Encoder/Decoder</h3>
+                    </div>
+                    <p>Encode or decode HTML entities</p>
+                </div>
+
+                <div class="tool-card" data-category="link" data-tool="qr-generator">
+                    <div class="tool-header">
+                        <i class="fas fa-qrcode"></i>
+                        <h3>QR Code Generator</h3>
+                    </div>
+                    <p>Generate QR codes for URLs</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="json-formatter">
+                    <div class="tool-header">
+                        <i class="fas fa-brackets-curly"></i>
+                        <h3>JSON Formatter</h3>
+                    </div>
+                    <p>Format and validate JSON data</p>
+                </div>
+
+                <div class="tool-card" data-category="technical" data-tool="base64">
+                    <div class="tool-header">
+                        <i class="fas fa-file-export"></i>
+                        <h3>Base64 Encoder/Decoder</h3>
+                    </div>
+                    <p>Encode or decode Base64 strings</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Tool Modal -->
+    <div id="toolModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <button class="close-btn" id="closeModal" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Tool content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About SEO Tools Hub</h3>
+                    <p>Comprehensive collection of 50+ free online SEO tools to help you optimize your website and improve search engine rankings.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#text">Text Tools</a></li>
+                        <li><a href="#keyword">Keyword Tools</a></li>
+                        <li><a href="#link">Link Tools</a></li>
+                        <li><a href="#technical">Technical SEO</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#blog">SEO Blog</a></li>
+                        <li><a href="#guides">SEO Guides</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SEO Tools Hub. All rights reserved. Made with <i class="fas fa-heart"></i> for SEO professionals</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
