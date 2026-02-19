@@ -3010,7 +3010,9 @@ function analyzeAnchorText() {
     const categories = { 'exact match': 0, 'generic': 0, 'url': 0, 'branded': 0 };
     let match;
     while ((match = linkRegex.exec(html)) !== null) {
-        const text = match[2].replace(/<[^>]+>/g, '').trim();
+        const tempEl = document.createElement('span');
+        tempEl.innerHTML = match[2];
+        const text = (tempEl.textContent || '').trim();
         if (text) {
             anchors[text] = (anchors[text] || 0) + 1;
             const lowerText = text.toLowerCase();
