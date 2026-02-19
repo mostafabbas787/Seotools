@@ -407,24 +407,35 @@ function generateMetaTags() {
         return;
     }
     
+    // Escape HTML to prevent XSS
+    const escapeHtml = (str) => str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    
     const metaTags = `<!-- Primary Meta Tags -->
-<title>${title}</title>
-<meta name="title" content="${title}">
-<meta name="description" content="${description}">
-${keywords ? `<meta name="keywords" content="${keywords}">` : ''}
-${author ? `<meta name="author" content="${author}">` : ''}
+<title>${escapeHtml(title)}</title>
+<meta name="title" content="${escapeHtml(title)}">
+<meta name="description" content="${escapeHtml(description)}">
+${keywords ? `<meta name="keywords" content="${escapeHtml(keywords)}">` : ''}
+${author ? `<meta name="author" content="${escapeHtml(author)}">` : ''}
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="${title}">
-<meta property="og:description" content="${description}">
+<meta property="og:title" content="${escapeHtml(title)}">
+<meta property="og:description" content="${escapeHtml(description)}">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:title" content="${title}">
-<meta property="twitter:description" content="${description}">`;
+<meta property="twitter:title" content="${escapeHtml(title)}">
+<meta property="twitter:description" content="${escapeHtml(description)}">`;
     
-    document.getElementById('metaTagsResult').innerHTML = `<pre>${metaTags}</pre>`;
+    const pre = document.createElement('pre');
+    pre.textContent = metaTags;
+    document.getElementById('metaTagsResult').innerHTML = '';
+    document.getElementById('metaTagsResult').appendChild(pre);
 }
 
 // URL Encoder/Decoder
@@ -432,7 +443,10 @@ function encodeURL() {
     const input = document.getElementById('urlInput').value;
     try {
         const encoded = encodeURIComponent(input);
-        document.getElementById('urlResult').innerHTML = `<pre>${encoded}</pre>`;
+        const pre = document.createElement('pre');
+        pre.textContent = encoded;
+        document.getElementById('urlResult').innerHTML = '';
+        document.getElementById('urlResult').appendChild(pre);
     } catch (e) {
         showMessage('urlResult', 'Error encoding URL', 'error');
     }
@@ -442,7 +456,10 @@ function decodeURL() {
     const input = document.getElementById('urlInput').value;
     try {
         const decoded = decodeURIComponent(input);
-        document.getElementById('urlResult').innerHTML = `<pre>${decoded}</pre>`;
+        const pre = document.createElement('pre');
+        pre.textContent = decoded;
+        document.getElementById('urlResult').innerHTML = '';
+        document.getElementById('urlResult').appendChild(pre);
     } catch (e) {
         showMessage('urlResult', 'Error decoding URL', 'error');
     }
@@ -468,7 +485,10 @@ function convertCase(type) {
             break;
     }
     
-    document.getElementById('caseResult').innerHTML = `<pre>${result}</pre>`;
+    const pre = document.createElement('pre');
+    pre.textContent = result;
+    document.getElementById('caseResult').innerHTML = '';
+    document.getElementById('caseResult').appendChild(pre);
 }
 
 // Lorem Ipsum Generator
@@ -487,7 +507,10 @@ function generateLoremIpsum() {
         result += lorem[i % lorem.length] + '\n\n';
     }
     
-    document.getElementById('loremResult').innerHTML = `<pre>${result}</pre>`;
+    const pre = document.createElement('pre');
+    pre.textContent = result;
+    document.getElementById('loremResult').innerHTML = '';
+    document.getElementById('loremResult').appendChild(pre);
 }
 
 // Robots.txt Generator
@@ -512,7 +535,10 @@ function generateRobotsTxt() {
         robotsTxt += `\nSitemap: ${sitemap}`;
     }
     
-    document.getElementById('robotsResult').innerHTML = `<pre>${robotsTxt}</pre>`;
+    const pre = document.createElement('pre');
+    pre.textContent = robotsTxt;
+    document.getElementById('robotsResult').innerHTML = '';
+    document.getElementById('robotsResult').appendChild(pre);
 }
 
 // HTML Encoder/Decoder
@@ -524,7 +550,10 @@ function encodeHTML() {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
-    document.getElementById('htmlResult').innerHTML = `<pre>${encoded}</pre>`;
+    const pre = document.createElement('pre');
+    pre.textContent = encoded;
+    document.getElementById('htmlResult').innerHTML = '';
+    document.getElementById('htmlResult').appendChild(pre);
 }
 
 function decodeHTML() {
@@ -535,7 +564,10 @@ function decodeHTML() {
         .replace(/&gt;/g, '>')
         .replace(/&quot;/g, '"')
         .replace(/&#039;/g, "'");
-    document.getElementById('htmlResult').innerHTML = `<pre>${decoded}</pre>`;
+    const pre = document.createElement('pre');
+    pre.textContent = decoded;
+    document.getElementById('htmlResult').innerHTML = '';
+    document.getElementById('htmlResult').appendChild(pre);
 }
 
 // Base64 Encoder/Decoder
@@ -545,9 +577,13 @@ function encodeBase64() {
         // Use TextEncoder for proper UTF-8 encoding
         const encoder = new TextEncoder();
         const data = encoder.encode(input);
-        const binary = String.fromCharCode(...data);
+        // Use Array.from to avoid stack overflow with large inputs
+        const binary = Array.from(data, byte => String.fromCharCode(byte)).join('');
         const encoded = btoa(binary);
-        document.getElementById('base64Result').innerHTML = `<pre>${encoded}</pre>`;
+        const pre = document.createElement('pre');
+        pre.textContent = encoded;
+        document.getElementById('base64Result').innerHTML = '';
+        document.getElementById('base64Result').appendChild(pre);
     } catch (e) {
         showMessage('base64Result', 'Error encoding to Base64', 'error');
     }
@@ -564,7 +600,10 @@ function decodeBase64() {
         }
         const decoder = new TextDecoder();
         const decoded = decoder.decode(bytes);
-        document.getElementById('base64Result').innerHTML = `<pre>${decoded}</pre>`;
+        const pre = document.createElement('pre');
+        pre.textContent = decoded;
+        document.getElementById('base64Result').innerHTML = '';
+        document.getElementById('base64Result').appendChild(pre);
     } catch (e) {
         showMessage('base64Result', 'Error decoding from Base64', 'error');
     }
@@ -576,7 +615,10 @@ function formatJSON() {
     try {
         const parsed = JSON.parse(input);
         const formatted = JSON.stringify(parsed, null, 2);
-        document.getElementById('jsonResult').innerHTML = `<pre>${formatted}</pre>`;
+        const pre = document.createElement('pre');
+        pre.textContent = formatted;
+        document.getElementById('jsonResult').innerHTML = '';
+        document.getElementById('jsonResult').appendChild(pre);
     } catch (e) {
         showMessage('jsonResult', 'Invalid JSON: ' + e.message, 'error');
     }
@@ -587,7 +629,10 @@ function minifyJSON() {
     try {
         const parsed = JSON.parse(input);
         const minified = JSON.stringify(parsed);
-        document.getElementById('jsonResult').innerHTML = `<pre>${minified}</pre>`;
+        const pre = document.createElement('pre');
+        pre.textContent = minified;
+        document.getElementById('jsonResult').innerHTML = '';
+        document.getElementById('jsonResult').appendChild(pre);
     } catch (e) {
         showMessage('jsonResult', 'Invalid JSON: ' + e.message, 'error');
     }
