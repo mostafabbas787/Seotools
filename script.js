@@ -630,6 +630,123 @@ function getToolInterface(toolType) {
                 </div>
                 <div class="result-box" id="lazyLoadResult"></div>
             </div>
+        `,
+        'title-generator': `
+            <div class="tool-interface">
+                <div class="input-group">
+                    <label for="titleKeyword">Primary Keyword:</label>
+                    <input type="text" id="titleKeyword" placeholder="e.g. best running shoes">
+                </div>
+                <div class="input-group">
+                    <label for="titleStyle">Title Style:</label>
+                    <select id="titleStyle">
+                        <option value="howto">How-To</option>
+                        <option value="listicle">Listicle</option>
+                        <option value="guide">Ultimate Guide</option>
+                        <option value="review">Review</option>
+                        <option value="question">Question</option>
+                        <option value="comparison">Comparison</option>
+                    </select>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="generateSEOTitles()">
+                        <i class="fas fa-heading"></i> Generate Titles
+                    </button>
+                    <button class="btn btn-copy" onclick="copyToClipboard('titleResult')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="result-box" id="titleResult"></div>
+            </div>
+        `,
+        'meta-description': `
+            <div class="tool-interface">
+                <div class="input-group">
+                    <label for="metaDescContent">Page Content or Topic:</label>
+                    <textarea id="metaDescContent" placeholder="Describe your page content or paste a summary..." rows="5"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="metaDescKeyword">Target Keyword (optional):</label>
+                    <input type="text" id="metaDescKeyword" placeholder="e.g. SEO tools">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="generateMetaDescription()">
+                        <i class="fas fa-align-left"></i> Generate Descriptions
+                    </button>
+                    <button class="btn btn-copy" onclick="copyToClipboard('metaDescResult')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="result-box" id="metaDescResult"></div>
+            </div>
+        `,
+        'url-rewriter': `
+            <div class="tool-interface">
+                <div class="input-group">
+                    <label for="urlRewriteInput">Enter URL or Page Title:</label>
+                    <input type="text" id="urlRewriteInput" placeholder="e.g. My Blog Post Title! (2024) or https://example.com/page?id=123">
+                </div>
+                <div class="input-group">
+                    <label for="urlRewriteBase">Base URL (optional):</label>
+                    <input type="text" id="urlRewriteBase" placeholder="https://example.com">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="rewriteURL()">
+                        <i class="fas fa-pen"></i> Generate SEO-Friendly URL
+                    </button>
+                    <button class="btn btn-copy" onclick="copyToClipboard('urlRewriteResult')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="result-box" id="urlRewriteResult"></div>
+            </div>
+        `,
+        'image-alt': `
+            <div class="tool-interface">
+                <div class="input-group">
+                    <label for="altImageSubject">Image Subject:</label>
+                    <input type="text" id="altImageSubject" placeholder="e.g. golden retriever puppy playing in park">
+                </div>
+                <div class="input-group">
+                    <label for="altPageContext">Page Context (optional):</label>
+                    <input type="text" id="altPageContext" placeholder="e.g. dog training tips blog post">
+                </div>
+                <div class="input-group">
+                    <label for="altKeyword">Target Keyword (optional):</label>
+                    <input type="text" id="altKeyword" placeholder="e.g. dog training">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="generateImageAlt()">
+                        <i class="fas fa-image"></i> Generate Alt Text
+                    </button>
+                    <button class="btn btn-copy" onclick="copyToClipboard('imageAltResult')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="result-box" id="imageAltResult"></div>
+            </div>
+        `,
+        'qr-generator': `
+            <div class="tool-interface">
+                <div class="input-group">
+                    <label for="qrInput">Enter URL or Text:</label>
+                    <input type="text" id="qrInput" placeholder="https://example.com">
+                </div>
+                <div class="input-group">
+                    <label for="qrSize">QR Code Size:</label>
+                    <select id="qrSize">
+                        <option value="150">Small (150×150)</option>
+                        <option value="250" selected>Medium (250×250)</option>
+                        <option value="400">Large (400×400)</option>
+                    </select>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="generateQRCode()">
+                        <i class="fas fa-qrcode"></i> Generate QR Code
+                    </button>
+                </div>
+                <div class="result-box" id="qrResult" style="text-align:center;"></div>
+            </div>
         `
     };
 
@@ -655,7 +772,8 @@ function getToolInterface(toolType) {
         'base64': 1, 'json-formatter': 1, 'readability': 1, 'minify-css': 1,
         'minify-js': 1, 'twitter-card': 1, 'facebook-og': 1, 'schema-markup': 1,
         'canonical': 1, 'hreflang': 1, 'sitemap': 1, 'htaccess': 1,
-        'breadcrumb': 1, 'lazy-load': 1
+        'breadcrumb': 1, 'lazy-load': 1, 'title-generator': 1,
+        'meta-description': 1, 'url-rewriter': 1, 'image-alt': 1, 'qr-generator': 1
     };
     const countEl = document.getElementById('activeToolCount');
     if (countEl) countEl.textContent = Object.keys(interfaces).length;
@@ -1428,6 +1546,301 @@ function generateLazyLoad() {
     pre.textContent = output;
     document.getElementById('lazyLoadResult').innerHTML = '';
     document.getElementById('lazyLoadResult').appendChild(pre);
+}
+
+// SEO Title Generator
+function generateSEOTitles() {
+    const keyword = document.getElementById('titleKeyword').value.trim();
+    const style = document.getElementById('titleStyle').value;
+
+    if (!keyword) {
+        showMessage('titleResult', 'Please enter a primary keyword.', 'error');
+        return;
+    }
+
+    const capitalize = str => str.replace(/\b\w/g, l => l.toUpperCase());
+    const capitalized = capitalize(keyword);
+    const year = new Date().getFullYear();
+
+    const templates = {
+        howto: [
+            `How to ${capitalized}: A Step-by-Step Guide (${year})`,
+            `How to ${capitalized} Like a Pro | Expert Tips`,
+            `How to ${capitalized} — Everything You Need to Know`,
+            `The Easiest Way to ${capitalized} in ${year}`,
+            `How to ${capitalized}: Tips, Tricks & Best Practices`
+        ],
+        listicle: [
+            `10 Best ${capitalized} You Need to Know in ${year}`,
+            `7 ${capitalized} Tips That Actually Work`,
+            `15 ${capitalized} Strategies for Better Results`,
+            `5 ${capitalized} Mistakes You're Probably Making`,
+            `Top 10 ${capitalized} Tools & Resources (${year})`
+        ],
+        guide: [
+            `The Ultimate Guide to ${capitalized} (${year})`,
+            `${capitalized}: The Complete Guide for Beginners`,
+            `${capitalized} 101: Everything You Need to Know`,
+            `The Definitive Guide to ${capitalized} in ${year}`,
+            `A Comprehensive Guide to ${capitalized}`
+        ],
+        review: [
+            `${capitalized} Review: Is It Worth It in ${year}?`,
+            `${capitalized} Review — Pros, Cons & Verdict`,
+            `Honest ${capitalized} Review: What You Need to Know`,
+            `${capitalized} Review: Our Expert Analysis (${year})`,
+            `${capitalized}: An In-Depth Review & Comparison`
+        ],
+        question: [
+            `What Is ${capitalized}? A Simple Explanation`,
+            `Why Is ${capitalized} Important for Your Business?`,
+            `Is ${capitalized} Worth It? Here's the Truth`,
+            `What Makes ${capitalized} So Effective in ${year}?`,
+            `When Should You Use ${capitalized}? Expert Advice`
+        ],
+        comparison: [
+            `${capitalized} vs. Alternatives: Which Is Best? (${year})`,
+            `${capitalized} Comparison: Top Options Reviewed`,
+            `Best ${capitalized} Compared: Features, Pricing & More`,
+            `${capitalized}: Side-by-Side Comparison Guide`,
+            `Choosing the Right ${capitalized}: A Comparison`
+        ]
+    };
+
+    const titles = templates[style] || templates.howto;
+
+    const resultsDiv = document.getElementById('titleResult');
+    resultsDiv.innerHTML = '';
+
+    titles.forEach(title => {
+        const p = document.createElement('p');
+        p.style.marginBottom = '0.75rem';
+
+        const charCount = title.length;
+        const badge = document.createElement('span');
+        badge.style.cssText = 'font-size:0.8rem;margin-left:0.5rem;padding:2px 6px;border-radius:4px;color:white;background:' + (charCount <= 60 ? '#10b981' : '#ef4444');
+        badge.textContent = charCount + ' chars';
+
+        const text = document.createTextNode(title);
+        p.appendChild(text);
+        p.appendChild(badge);
+        resultsDiv.appendChild(p);
+    });
+}
+
+// Meta Description Generator
+function generateMetaDescription() {
+    const content = document.getElementById('metaDescContent').value.trim();
+    const keyword = document.getElementById('metaDescKeyword').value.trim();
+
+    if (!content) {
+        showMessage('metaDescResult', 'Please enter page content or topic.', 'error');
+        return;
+    }
+
+    const sentences = content.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 0);
+    const firstSentence = sentences[0] || content;
+
+    const truncate = (str, max) => {
+        if (str.length <= max) return str;
+        const truncated = str.substring(0, max);
+        const lastSpace = truncated.lastIndexOf(' ');
+        return (lastSpace > 0 ? truncated.substring(0, lastSpace) : truncated) + '...';
+    };
+
+    const descriptions = [];
+
+    if (keyword) {
+        descriptions.push(
+            truncate(`Discover ${keyword}: ${firstSentence}.`, 160),
+            truncate(`Learn about ${keyword}. ${firstSentence}. Find out more today.`, 160),
+            truncate(`Looking for ${keyword}? ${firstSentence}. Get started now.`, 160),
+            truncate(`${firstSentence}. Your complete resource for ${keyword}.`, 160)
+        );
+    } else {
+        descriptions.push(
+            truncate(`${firstSentence}. Learn more on our site.`, 160),
+            truncate(`${firstSentence}. Find out everything you need to know.`, 160),
+            truncate(`${firstSentence}. Get started today.`, 160),
+            truncate(`Discover more: ${firstSentence}.`, 160)
+        );
+    }
+
+    const resultsDiv = document.getElementById('metaDescResult');
+    resultsDiv.innerHTML = '';
+
+    descriptions.forEach(desc => {
+        const p = document.createElement('p');
+        p.style.marginBottom = '0.75rem';
+
+        const charCount = desc.length;
+        const badge = document.createElement('span');
+        badge.style.cssText = 'font-size:0.8rem;margin-left:0.5rem;padding:2px 6px;border-radius:4px;color:white;background:' + (charCount >= 120 && charCount <= 160 ? '#10b981' : charCount < 120 ? '#f59e0b' : '#ef4444');
+        badge.textContent = charCount + ' chars';
+
+        const text = document.createTextNode(desc);
+        p.appendChild(text);
+        p.appendChild(badge);
+        resultsDiv.appendChild(p);
+    });
+}
+
+// URL Rewriter
+function rewriteURL() {
+    const input = document.getElementById('urlRewriteInput').value.trim();
+    const base = document.getElementById('urlRewriteBase').value.trim();
+
+    if (!input) {
+        showMessage('urlRewriteResult', 'Please enter a URL or page title.', 'error');
+        return;
+    }
+
+    let slug = input;
+
+    // If it looks like a URL, extract the meaningful part
+    try {
+        if (input.startsWith('http://') || input.startsWith('https://')) {
+            const url = new URL(input);
+            slug = url.pathname + (url.search || '');
+        }
+    } catch (e) {
+        // Not a valid URL, treat as title text
+    }
+
+    // Convert to SEO-friendly slug
+    slug = slug
+        .toLowerCase()
+        .replace(/['']/g, '')          // remove apostrophes
+        .replace(/[^a-z0-9\s-]/g, ' ') // replace special chars with space
+        .replace(/\s+/g, '-')          // replace spaces with hyphens
+        .replace(/-+/g, '-')           // collapse multiple hyphens
+        .replace(/^-|-$/g, '');        // trim leading/trailing hyphens
+
+    const fullUrl = base ? base.replace(/\/+$/, '') + '/' + slug : '/' + slug;
+
+    const resultsDiv = document.getElementById('urlRewriteResult');
+    resultsDiv.innerHTML = '';
+
+    const p1 = document.createElement('p');
+    const label1 = document.createElement('strong');
+    label1.textContent = 'SEO-Friendly URL: ';
+    p1.appendChild(label1);
+    p1.appendChild(document.createTextNode(fullUrl));
+    p1.style.marginBottom = '0.5rem';
+
+    const p2 = document.createElement('p');
+    const label2 = document.createElement('strong');
+    label2.textContent = 'Slug: ';
+    p2.appendChild(label2);
+    p2.appendChild(document.createTextNode(slug));
+    p2.style.marginBottom = '0.5rem';
+
+    const p3 = document.createElement('p');
+    p3.style.cssText = 'font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;';
+    const lengthOk = slug.length <= 75;
+    p3.textContent = 'Slug length: ' + slug.length + ' chars ' + (lengthOk ? '✅ Good' : '⚠️ Consider shortening');
+
+    resultsDiv.appendChild(p1);
+    resultsDiv.appendChild(p2);
+    resultsDiv.appendChild(p3);
+}
+
+// Image Alt Text Generator
+function generateImageAlt() {
+    const subject = document.getElementById('altImageSubject').value.trim();
+    const context = document.getElementById('altPageContext').value.trim();
+    const keyword = document.getElementById('altKeyword').value.trim();
+
+    if (!subject) {
+        showMessage('imageAltResult', 'Please enter the image subject.', 'error');
+        return;
+    }
+
+    const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+    const alts = [];
+
+    // Descriptive alt text options
+    alts.push(capitalize(subject));
+
+    if (keyword && context) {
+        alts.push(`${capitalize(subject)} — ${keyword} | ${context}`);
+        alts.push(`${capitalize(keyword)}: ${subject}`);
+    } else if (keyword) {
+        alts.push(`${capitalize(subject)} — ${keyword}`);
+        alts.push(`${capitalize(keyword)}: ${subject}`);
+    } else if (context) {
+        alts.push(`${capitalize(subject)} — ${context}`);
+    }
+
+    alts.push(`Photo of ${subject}`);
+    alts.push(`Illustration showing ${subject}`);
+
+    const resultsDiv = document.getElementById('imageAltResult');
+    resultsDiv.innerHTML = '';
+
+    const heading = document.createElement('p');
+    heading.innerHTML = '<strong>Suggested alt text options:</strong>';
+    heading.style.marginBottom = '0.75rem';
+    resultsDiv.appendChild(heading);
+
+    alts.forEach(alt => {
+        const p = document.createElement('p');
+        p.style.cssText = 'margin-bottom:0.5rem;padding:0.5rem;background:var(--bg-primary);border:1px solid var(--border-color);border-radius:6px;';
+
+        const code = document.createElement('code');
+        code.textContent = 'alt="' + alt + '"';
+        p.appendChild(code);
+
+        const charCount = alt.length;
+        const badge = document.createElement('span');
+        badge.style.cssText = 'font-size:0.8rem;margin-left:0.5rem;padding:2px 6px;border-radius:4px;color:white;background:' + (charCount <= 125 ? '#10b981' : '#f59e0b');
+        badge.textContent = charCount + ' chars';
+        p.appendChild(badge);
+
+        resultsDiv.appendChild(p);
+    });
+
+    const tip = document.createElement('p');
+    tip.style.cssText = 'font-size:0.85rem;color:var(--text-secondary);margin-top:0.75rem;';
+    tip.textContent = 'Tip: Keep alt text under 125 characters and make it descriptive. Avoid keyword stuffing.';
+    resultsDiv.appendChild(tip);
+}
+
+// QR Code Generator
+function generateQRCode() {
+    const input = document.getElementById('qrInput').value.trim();
+    const size = document.getElementById('qrSize').value;
+
+    if (!input) {
+        showMessage('qrResult', 'Please enter a URL or text.', 'error');
+        return;
+    }
+
+    const resultsDiv = document.getElementById('qrResult');
+    resultsDiv.innerHTML = '';
+
+    // Generate QR code using a simple canvas-based approach
+    const encodedData = encodeURIComponent(input);
+    const qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=' + size + 'x' + size + '&data=' + encodedData;
+
+    const img = document.createElement('img');
+    img.src = qrApiUrl;
+    img.alt = 'QR Code for: ' + input;
+    img.width = parseInt(size, 10);
+    img.height = parseInt(size, 10);
+    img.style.cssText = 'border-radius:8px;margin:1rem auto;display:block;';
+
+    img.onerror = function() {
+        showMessage('qrResult', 'Failed to generate QR code. Please check your connection.', 'error');
+    };
+
+    const caption = document.createElement('p');
+    caption.style.cssText = 'font-size:0.9rem;color:var(--text-secondary);margin-top:0.5rem;';
+    caption.textContent = 'QR Code for: ' + input;
+
+    resultsDiv.appendChild(img);
+    resultsDiv.appendChild(caption);
 }
 
 // Utility Functions
