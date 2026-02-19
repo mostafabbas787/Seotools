@@ -647,6 +647,20 @@ function getToolInterface(toolType) {
     `;
 }
 
+// Update active tool count dynamically
+(function updateActiveToolCount() {
+    const interfaces = {
+        'word-counter': 1, 'keyword-density': 1, 'meta-tags': 1, 'url-encoder': 1,
+        'text-case': 1, 'lorem-ipsum': 1, 'robots-txt': 1, 'html-encoder': 1,
+        'base64': 1, 'json-formatter': 1, 'readability': 1, 'minify-css': 1,
+        'minify-js': 1, 'twitter-card': 1, 'facebook-og': 1, 'schema-markup': 1,
+        'canonical': 1, 'hreflang': 1, 'sitemap': 1, 'htaccess': 1,
+        'breadcrumb': 1, 'lazy-load': 1
+    };
+    const countEl = document.getElementById('activeToolCount');
+    if (countEl) countEl.textContent = Object.keys(interfaces).length;
+})();
+
 function initializeToolFunctionality(toolType) {
     if (toolType === 'word-counter') {
         const textarea = document.getElementById('wordCountText');
@@ -1083,7 +1097,9 @@ function minifyJS() {
 
     let minified = input;
     minified = minified.replace(/\/\*[\s\S]*?\*\//g, '');
-    minified = minified.replace(/\/\/.*$/gm, '');
+    minified = minified.replace(/(["'`])(?:(?!\1|\\).|\\.)*\1|(\/\/.*$)/gm, function(match, quote) {
+        return quote ? match : '';
+    });
     minified = minified.split('\n').map(line => line.trim()).filter(line => line.length > 0).join(' ');
     minified = minified.replace(/\s+/g, ' ');
     minified = minified.trim();
@@ -1403,7 +1419,7 @@ function generateLazyLoad() {
 
     let output = '';
     if (cssClass) {
-        output = '<div class="' + escapeHtml(cssClass) + '-wrapper">\n  ' + imgTag + '\n</div>';
+        output = '<div class="' + escapeHtml(cssClass.trim()) + '-wrapper">\n  ' + imgTag + '\n</div>';
     } else {
         output = imgTag;
     }
