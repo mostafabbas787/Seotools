@@ -10,10 +10,13 @@ from xml.etree.ElementTree import Element, SubElement, tostring
 
 from flask import Flask, render_template, request, jsonify
 
+import os
+import secrets
 import requests
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 
 
 # ---------------------------------------------------------------------------
