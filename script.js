@@ -655,12 +655,21 @@ function showMessage(elementId, message, type) {
     const messageClass = type === 'error' ? 'error-message' : 'success-message';
     const icon = type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
     
-    element.innerHTML = `
-        <div class="${messageClass}">
-            <i class="fas ${icon}"></i>
-            <span>${message}</span>
-        </div>
-    `;
+    // Create elements safely without innerHTML
+    const messageDiv = document.createElement('div');
+    messageDiv.className = messageClass;
+    
+    const iconElement = document.createElement('i');
+    iconElement.className = `fas ${icon}`;
+    
+    const messageSpan = document.createElement('span');
+    messageSpan.textContent = message; // Use textContent to prevent XSS
+    
+    messageDiv.appendChild(iconElement);
+    messageDiv.appendChild(messageSpan);
+    
+    element.innerHTML = '';
+    element.appendChild(messageDiv);
     
     setTimeout(() => {
         if (element.querySelector('.error-message, .success-message')) {
