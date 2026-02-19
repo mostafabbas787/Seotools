@@ -576,12 +576,13 @@ function encodeHTML() {
 
 function decodeHTML() {
     const input = document.getElementById('htmlInput').value;
+    // Decode in reverse order of encoding to prevent double-decoding issues
     const decoded = input
-        .replace(/&amp;/g, '&')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
+        .replace(/&#039;/g, "'")
         .replace(/&quot;/g, '"')
-        .replace(/&#039;/g, "'");
+        .replace(/&gt;/g, '>')
+        .replace(/&lt;/g, '<')
+        .replace(/&amp;/g, '&');
     const pre = document.createElement('pre');
     pre.textContent = decoded;
     document.getElementById('htmlResult').innerHTML = '';
