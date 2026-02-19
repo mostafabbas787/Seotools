@@ -2514,12 +2514,20 @@ function researchKeywords() {
 
     const keywords = [];
 
+    const informationalPrefixes = ['how to', 'what is', 'why'];
+    const commercialPrefixes = ['free', 'cheap', 'best', 'top'];
+    const informationalSuffixes = ['guide', 'tutorial', 'tips', 'examples'];
+
     prefixes.forEach(p => {
-        keywords.push({ term: p + ' ' + keyword, intent: p === 'how to' || p === 'what is' || p === 'why' ? 'Informational' : p === 'free' || p === 'cheap' || p === 'best' || p === 'top' ? 'Commercial' : 'Navigational' });
+        let intent = 'Navigational';
+        if (informationalPrefixes.includes(p)) intent = 'Informational';
+        else if (commercialPrefixes.includes(p)) intent = 'Commercial';
+        keywords.push({ term: p + ' ' + keyword, intent: intent });
     });
 
     suffixes.forEach(s => {
-        keywords.push({ term: keyword + ' ' + s, intent: s === 'guide' || s === 'tutorial' || s === 'tips' || s === 'examples' ? 'Informational' : 'Transactional' });
+        const intent = informationalSuffixes.includes(s) ? 'Informational' : 'Transactional';
+        keywords.push({ term: keyword + ' ' + s, intent: intent });
     });
 
     questions.forEach(q => {
@@ -3180,8 +3188,11 @@ function generateFaviconCode() {
 function generateOgImage() {
     const ogTitle = document.getElementById('ogTitle').value.trim();
     const ogSubtitle = document.getElementById('ogSubtitle').value.trim();
-    const bgColor = document.getElementById('ogBgColor').value.trim() || '#4A90D9';
-    const textColor = document.getElementById('ogTextColor').value.trim() || '#FFFFFF';
+    const colorRegex = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/;
+    const rawBg = document.getElementById('ogBgColor').value.trim() || '#4A90D9';
+    const rawText = document.getElementById('ogTextColor').value.trim() || '#FFFFFF';
+    const bgColor = colorRegex.test(rawBg) ? rawBg : '#4A90D9';
+    const textColor = colorRegex.test(rawText) ? rawText : '#FFFFFF';
     if (!ogTitle) {
         showMessage('ogImageResult', 'Please enter a title.', 'error');
         return;
