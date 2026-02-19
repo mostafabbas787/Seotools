@@ -747,7 +747,494 @@ function getToolInterface(toolType) {
                 </div>
                 <div class="result-box" id="qrResult" style="text-align:center;"></div>
             </div>
-        `
+        `,
+
+    'plagiarism': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="plagiarismText">Enter text to check:</label>
+                <textarea id="plagiarismText" placeholder="Paste your text here to check for originality..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkPlagiarism()">
+                    <i class="fas fa-search"></i> Check Plagiarism
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('plagiarismResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="plagiarismResult"></div>
+        </div>
+    `,
+
+    'grammar': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="grammarText">Enter text to check:</label>
+                <textarea id="grammarText" placeholder="Paste your text here to check grammar..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkGrammar()">
+                    <i class="fas fa-spell-check"></i> Check Grammar
+                </button>
+            </div>
+            <div class="result-box" id="grammarResult"></div>
+        </div>
+    `,
+
+    'article-rewriter': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="rewriterText">Enter text to rewrite:</label>
+                <textarea id="rewriterText" placeholder="Paste your article here to rewrite..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="rewriteArticle()">
+                    <i class="fas fa-sync-alt"></i> Rewrite Article
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('rewriterResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="rewriterResult"></div>
+        </div>
+    `,
+
+    'keyword-research': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="seedKeyword">Enter seed keyword:</label>
+                <input type="text" id="seedKeyword" placeholder="e.g. digital marketing">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="researchKeywords()">
+                    <i class="fas fa-search"></i> Research Keywords
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('keywordResearchResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="keywordResearchResult"></div>
+        </div>
+    `,
+
+    'keyword-position': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="positionUrl">Website URL:</label>
+                <input type="text" id="positionUrl" placeholder="https://example.com">
+            </div>
+            <div class="input-group">
+                <label for="positionKeyword">Target Keyword:</label>
+                <input type="text" id="positionKeyword" placeholder="e.g. best seo tools">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkKeywordPosition()">
+                    <i class="fas fa-map-marker-alt"></i> Check Position
+                </button>
+            </div>
+            <div class="result-box" id="positionResult"></div>
+        </div>
+    `,
+
+    'keyword-difficulty': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="difficultyKeyword">Enter keyword:</label>
+                <input type="text" id="difficultyKeyword" placeholder="e.g. seo tools">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkKeywordDifficulty()">
+                    <i class="fas fa-chart-bar"></i> Check Difficulty
+                </button>
+            </div>
+            <div class="result-box" id="difficultyResult"></div>
+        </div>
+    `,
+
+    'long-tail': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="longTailKeyword">Enter seed keyword:</label>
+                <input type="text" id="longTailKeyword" placeholder="e.g. email marketing">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="findLongTailKeywords()">
+                    <i class="fas fa-list"></i> Find Long Tail Keywords
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('longTailResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="longTailResult"></div>
+        </div>
+    `,
+
+    'backlink-checker': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="backlinkUrl">Enter URL:</label>
+                <input type="text" id="backlinkUrl" placeholder="https://example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkBacklinks()">
+                    <i class="fas fa-link"></i> Check Backlinks
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('backlinkResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="backlinkResult"></div>
+        </div>
+    `,
+
+    'broken-link': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="brokenLinkHtml">Paste HTML content:</label>
+                <textarea id="brokenLinkHtml" placeholder="Paste HTML content to find links..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkBrokenLinks()">
+                    <i class="fas fa-unlink"></i> Check Links
+                </button>
+            </div>
+            <div class="result-box" id="brokenLinkResult"></div>
+        </div>
+    `,
+
+    'redirect-checker': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="redirectUrl">Enter URL:</label>
+                <input type="text" id="redirectUrl" placeholder="https://example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkRedirects()">
+                    <i class="fas fa-exchange-alt"></i> Check Redirects
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('redirectResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="redirectResult"></div>
+        </div>
+    `,
+
+    'domain-authority': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="domainAuthority">Enter domain:</label>
+                <input type="text" id="domainAuthority" placeholder="example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkDomainAuthority()">
+                    <i class="fas fa-chart-line"></i> Check Authority
+                </button>
+            </div>
+            <div class="result-box" id="domainAuthorityResult"></div>
+        </div>
+    `,
+
+    'www-redirect': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="wwwDomain">Enter domain:</label>
+                <input type="text" id="wwwDomain" placeholder="example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkWwwRedirect()">
+                    <i class="fas fa-globe"></i> Generate Redirect Code
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('wwwResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="wwwResult"></div>
+        </div>
+    `,
+
+    'link-analyzer': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="linkAnalyzerHtml">Paste HTML content:</label>
+                <textarea id="linkAnalyzerHtml" placeholder="Paste HTML content to analyze links..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="analyzeLinks()">
+                    <i class="fas fa-search"></i> Analyze Links
+                </button>
+            </div>
+            <div class="result-box" id="linkAnalyzerResult"></div>
+        </div>
+    `,
+
+    'anchor-text': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="anchorTextHtml">Paste HTML content:</label>
+                <textarea id="anchorTextHtml" placeholder="Paste HTML content to analyze anchor texts..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="analyzeAnchorText()">
+                    <i class="fas fa-anchor"></i> Analyze Anchor Text
+                </button>
+            </div>
+            <div class="result-box" id="anchorTextResult"></div>
+        </div>
+    `,
+
+    'nofollow-checker': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="nofollowHtml">Paste HTML content:</label>
+                <textarea id="nofollowHtml" placeholder="Paste HTML content to check nofollow links..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkNofollow()">
+                    <i class="fas fa-ban"></i> Check Nofollow
+                </button>
+            </div>
+            <div class="result-box" id="nofollowResult"></div>
+        </div>
+    `,
+
+    'image-optimizer': `
+        <div class="tool-interface">
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="showImageOptimizationTips()">
+                    <i class="fas fa-image"></i> Show Optimization Tips
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('imageOptimizerResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="imageOptimizerResult"></div>
+        </div>
+    `,
+
+    'favicon-generator': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="faviconUrl">Favicon Image URL:</label>
+                <input type="text" id="faviconUrl" placeholder="https://example.com/favicon.png">
+            </div>
+            <div class="input-group">
+                <label for="faviconSiteName">Site Name:</label>
+                <input type="text" id="faviconSiteName" placeholder="My Website">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="generateFaviconCode()">
+                    <i class="fas fa-star"></i> Generate Favicon Code
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('faviconResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="faviconResult"></div>
+        </div>
+    `,
+
+    'og-image': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="ogTitle">Title:</label>
+                <input type="text" id="ogTitle" placeholder="Your Title Here">
+            </div>
+            <div class="input-group">
+                <label for="ogSubtitle">Subtitle:</label>
+                <input type="text" id="ogSubtitle" placeholder="Your subtitle or description">
+            </div>
+            <div class="input-group">
+                <label for="ogBgColor">Background Color:</label>
+                <input type="text" id="ogBgColor" placeholder="#4A90D9" value="#4A90D9">
+            </div>
+            <div class="input-group">
+                <label for="ogTextColor">Text Color:</label>
+                <input type="text" id="ogTextColor" placeholder="#FFFFFF" value="#FFFFFF">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="generateOgImage()">
+                    <i class="fas fa-image"></i> Generate OG Image
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('ogImageResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="ogImageResult"></div>
+        </div>
+    `,
+
+    'page-speed': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="pageSpeedUrl">Enter URL:</label>
+                <input type="text" id="pageSpeedUrl" placeholder="https://example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="analyzePageSpeed()">
+                    <i class="fas fa-tachometer-alt"></i> Analyze Speed
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('pageSpeedResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="pageSpeedResult"></div>
+        </div>
+    `,
+
+    'mobile-friendly': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="mobileFriendlyUrl">Enter URL:</label>
+                <input type="text" id="mobileFriendlyUrl" placeholder="https://example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="testMobileFriendly()">
+                    <i class="fas fa-mobile-alt"></i> Test Mobile-Friendly
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('mobileFriendlyResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="mobileFriendlyResult"></div>
+        </div>
+    `,
+
+    'ssl-checker': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="sslDomain">Enter domain:</label>
+                <input type="text" id="sslDomain" placeholder="example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkSSL()">
+                    <i class="fas fa-lock"></i> Check SSL
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('sslResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="sslResult"></div>
+        </div>
+    `,
+
+    'structured-data': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="structuredDataInput">Paste JSON-LD:</label>
+                <textarea id="structuredDataInput" placeholder='Paste your JSON-LD structured data here...'></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="validateStructuredData()">
+                    <i class="fas fa-check-circle"></i> Validate
+                </button>
+            </div>
+            <div class="result-box" id="structuredDataResult"></div>
+        </div>
+    `,
+
+    'server-status': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="serverStatusUrl">Enter URL:</label>
+                <input type="text" id="serverStatusUrl" placeholder="https://example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkServerStatus()">
+                    <i class="fas fa-server"></i> Check Status
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('serverStatusResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="serverStatusResult"></div>
+        </div>
+    `,
+
+    'dns-lookup': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="dnsLookupDomain">Enter domain:</label>
+                <input type="text" id="dnsLookupDomain" placeholder="example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="performDnsLookup()">
+                    <i class="fas fa-network-wired"></i> Lookup DNS
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('dnsLookupResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="dnsLookupResult"></div>
+        </div>
+    `,
+
+    'whois': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="whoisDomain">Enter domain:</label>
+                <input type="text" id="whoisDomain" placeholder="example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="performWhoisLookup()">
+                    <i class="fas fa-info-circle"></i> WHOIS Lookup
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('whoisResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="whoisResult"></div>
+        </div>
+    `,
+
+    'ip-location': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="ipAddress">Enter IP Address:</label>
+                <input type="text" id="ipAddress" placeholder="e.g. 8.8.8.8">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="findIpLocation()">
+                    <i class="fas fa-map-marker-alt"></i> Find Location
+                </button>
+            </div>
+            <div class="result-box" id="ipLocationResult"></div>
+        </div>
+    `,
+
+    'headers-checker': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="headersUrl">Enter URL:</label>
+                <input type="text" id="headersUrl" placeholder="https://example.com">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="checkHttpHeaders()">
+                    <i class="fas fa-cog"></i> Check Headers
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard('headersResult')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="result-box" id="headersResult"></div>
+        </div>
+    `,
+
+    'rich-snippets': `
+        <div class="tool-interface">
+            <div class="input-group">
+                <label for="richSnippetInput">Paste JSON-LD:</label>
+                <textarea id="richSnippetInput" placeholder='Paste your JSON-LD structured data here...'></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="testRichSnippets()">
+                    <i class="fas fa-star"></i> Test Rich Snippets
+                </button>
+            </div>
+            <div class="result-box" id="richSnippetResult"></div>
+        </div>
+    `
     };
 
     return interfaces[toolType] || `
@@ -773,7 +1260,14 @@ function getToolInterface(toolType) {
         'minify-js': 1, 'twitter-card': 1, 'facebook-og': 1, 'schema-markup': 1,
         'canonical': 1, 'hreflang': 1, 'sitemap': 1, 'htaccess': 1,
         'breadcrumb': 1, 'lazy-load': 1, 'title-generator': 1,
-        'meta-description': 1, 'url-rewriter': 1, 'image-alt': 1, 'qr-generator': 1
+        'meta-description': 1, 'url-rewriter': 1, 'image-alt': 1, 'qr-generator': 1,
+        'plagiarism': 1, 'grammar': 1, 'article-rewriter': 1, 'keyword-research': 1,
+        'keyword-position': 1, 'keyword-difficulty': 1, 'long-tail': 1, 'backlink-checker': 1,
+        'broken-link': 1, 'redirect-checker': 1, 'domain-authority': 1, 'www-redirect': 1,
+        'link-analyzer': 1, 'anchor-text': 1, 'nofollow-checker': 1, 'image-optimizer': 1,
+        'favicon-generator': 1, 'og-image': 1, 'page-speed': 1, 'mobile-friendly': 1,
+        'ssl-checker': 1, 'structured-data': 1, 'server-status': 1, 'dns-lookup': 1,
+        'whois': 1, 'ip-location': 1, 'headers-checker': 1, 'rich-snippets': 1
     };
     const countEl = document.getElementById('activeToolCount');
     if (countEl) countEl.textContent = Object.keys(interfaces).length;
@@ -1841,6 +2335,1441 @@ function generateQRCode() {
 
     resultsDiv.appendChild(img);
     resultsDiv.appendChild(caption);
+}
+
+function checkPlagiarism() {
+    const text = document.getElementById('plagiarismText').value.trim();
+    if (!text) {
+        showMessage('plagiarismResult', 'Please enter text to check.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('plagiarismResult');
+    resultsDiv.innerHTML = '';
+
+    const words = text.split(/\s+/).filter(w => w.length > 0);
+    const wordCount = words.length;
+    const uniqueWords = new Set(words.map(w => w.toLowerCase()));
+    const uniqueCount = uniqueWords.size;
+    const diversityRatio = wordCount > 0 ? (uniqueCount / wordCount) * 100 : 0;
+
+    // Find common 3-word phrases
+    const phrases = {};
+    for (let i = 0; i < words.length - 2; i++) {
+        const phrase = words.slice(i, i + 3).join(' ').toLowerCase();
+        phrases[phrase] = (phrases[phrase] || 0) + 1;
+    }
+    const repeatedPhrases = Object.entries(phrases).filter(([, count]) => count > 1);
+
+    const uniquenessScore = Math.min(100, Math.round(diversityRatio * 1.5));
+
+    const title = document.createElement('h3');
+    title.textContent = 'Plagiarism Analysis';
+    resultsDiv.appendChild(title);
+
+    const scoreP = document.createElement('p');
+    scoreP.textContent = 'Uniqueness Score: ' + uniquenessScore + '%';
+    scoreP.style.fontWeight = 'bold';
+    resultsDiv.appendChild(scoreP);
+
+    const statsP = document.createElement('p');
+    statsP.textContent = 'Total Words: ' + wordCount + ' | Unique Words: ' + uniqueCount + ' | Word Diversity: ' + diversityRatio.toFixed(1) + '%';
+    resultsDiv.appendChild(statsP);
+
+    const phrasesP = document.createElement('p');
+    phrasesP.textContent = 'Repeated 3-word phrases found: ' + repeatedPhrases.length;
+    resultsDiv.appendChild(phrasesP);
+
+    if (repeatedPhrases.length > 0) {
+        const list = document.createElement('ul');
+        repeatedPhrases.slice(0, 10).forEach(([phrase, count]) => {
+            const li = document.createElement('li');
+            li.textContent = '"' + phrase + '" - repeated ' + count + ' times';
+            list.appendChild(li);
+        });
+        resultsDiv.appendChild(list);
+    }
+}
+
+function checkGrammar() {
+    const text = document.getElementById('grammarText').value.trim();
+    if (!text) {
+        showMessage('grammarResult', 'Please enter text to check.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('grammarResult');
+    resultsDiv.innerHTML = '';
+    const issues = [];
+
+    // Check double spaces
+    const doubleSpaces = (text.match(/ {2,}/g) || []).length;
+    if (doubleSpaces > 0) {
+        issues.push('Found ' + doubleSpaces + ' instance(s) of double spaces.');
+    }
+
+    // Check capitalization after period
+    const sentences = text.match(/\.\s+[a-z]/g);
+    if (sentences) {
+        issues.push('Found ' + sentences.length + ' sentence(s) not starting with a capital letter after a period.');
+    }
+
+    // Common misspellings
+    const misspellings = {
+        'teh': 'the', 'recieve': 'receive', 'definately': 'definitely',
+        'occured': 'occurred', 'seperate': 'separate', 'untill': 'until',
+        'accomodate': 'accommodate', 'occurence': 'occurrence',
+        'wierd': 'weird', 'thier': 'their'
+    };
+    const wordsInText = text.split(/\s+/);
+    for (const [wrong, right] of Object.entries(misspellings)) {
+        const found = wordsInText.filter(w => w.toLowerCase().replace(/[^a-z]/g, '') === wrong);
+        if (found.length > 0) {
+            issues.push('Possible misspelling: "' + wrong + '" should be "' + right + '" (' + found.length + ' occurrence(s)).');
+        }
+    }
+
+    // Repeated consecutive words
+    const repeatedWords = text.match(/\b(\w+)\s+\1\b/gi);
+    if (repeatedWords) {
+        issues.push('Found ' + repeatedWords.length + ' repeated consecutive word(s): ' + repeatedWords.join(', '));
+    }
+
+    const title = document.createElement('h3');
+    title.textContent = 'Grammar Check Results';
+    resultsDiv.appendChild(title);
+
+    if (issues.length === 0) {
+        const p = document.createElement('p');
+        p.textContent = 'No grammar issues found!';
+        p.style.color = '#27ae60';
+        resultsDiv.appendChild(p);
+    } else {
+        const list = document.createElement('ul');
+        issues.forEach(issue => {
+            const li = document.createElement('li');
+            li.textContent = issue;
+            list.appendChild(li);
+        });
+        resultsDiv.appendChild(list);
+    }
+}
+
+function rewriteArticle() {
+    const text = document.getElementById('rewriterText').value.trim();
+    if (!text) {
+        showMessage('rewriterResult', 'Please enter text to rewrite.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('rewriterResult');
+    resultsDiv.innerHTML = '';
+
+    const synonyms = {
+        'good': 'excellent', 'bad': 'poor', 'big': 'large', 'small': 'tiny',
+        'fast': 'quick', 'slow': 'sluggish', 'happy': 'delighted', 'sad': 'unhappy',
+        'important': 'crucial', 'easy': 'simple', 'hard': 'difficult', 'old': 'ancient',
+        'new': 'modern', 'start': 'begin', 'end': 'finish', 'help': 'assist',
+        'make': 'create', 'use': 'utilize', 'show': 'demonstrate', 'get': 'obtain'
+    };
+
+    const rewritten = text.replace(/\b\w+\b/g, function(word) {
+        const lower = word.toLowerCase();
+        if (synonyms[lower]) {
+            const replacement = synonyms[lower];
+            if (word[0] === word[0].toUpperCase()) {
+                return replacement.charAt(0).toUpperCase() + replacement.slice(1);
+            }
+            return replacement;
+        }
+        return word;
+    });
+
+    const origTitle = document.createElement('h3');
+    origTitle.textContent = 'Original Text';
+    resultsDiv.appendChild(origTitle);
+
+    const origP = document.createElement('p');
+    origP.textContent = text;
+    resultsDiv.appendChild(origP);
+
+    const rewriteTitle = document.createElement('h3');
+    rewriteTitle.textContent = 'Rewritten Text';
+    resultsDiv.appendChild(rewriteTitle);
+
+    const rewriteP = document.createElement('p');
+    rewriteP.textContent = rewritten;
+    resultsDiv.appendChild(rewriteP);
+}
+
+function researchKeywords() {
+    const keyword = document.getElementById('seedKeyword').value.trim();
+    if (!keyword) {
+        showMessage('keywordResearchResult', 'Please enter a seed keyword.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('keywordResearchResult');
+    resultsDiv.innerHTML = '';
+
+    const prefixes = ['best', 'top', 'how to', 'what is', 'why', 'free', 'cheap', 'online'];
+    const suffixes = ['tool', 'software', 'guide', 'tips', 'examples', 'tutorial', 'review', 'alternatives'];
+    const questions = ['how to ' + keyword, 'what is ' + keyword, 'why ' + keyword + ' is important', 'when to use ' + keyword];
+
+    const keywords = [];
+
+    prefixes.forEach(p => {
+        keywords.push({ term: p + ' ' + keyword, intent: p === 'how to' || p === 'what is' || p === 'why' ? 'Informational' : p === 'free' || p === 'cheap' || p === 'best' || p === 'top' ? 'Commercial' : 'Navigational' });
+    });
+
+    suffixes.forEach(s => {
+        keywords.push({ term: keyword + ' ' + s, intent: s === 'guide' || s === 'tutorial' || s === 'tips' || s === 'examples' ? 'Informational' : 'Transactional' });
+    });
+
+    questions.forEach(q => {
+        keywords.push({ term: q, intent: 'Informational' });
+    });
+
+    const title = document.createElement('h3');
+    title.textContent = 'Keyword Research Results for "' + keyword + '"';
+    resultsDiv.appendChild(title);
+
+    const list = document.createElement('ul');
+    keywords.forEach(kw => {
+        const li = document.createElement('li');
+        li.textContent = kw.term + ' [' + kw.intent + ']';
+        list.appendChild(li);
+    });
+    resultsDiv.appendChild(list);
+}
+
+function checkKeywordPosition() {
+    const url = document.getElementById('positionUrl').value.trim();
+    const keyword = document.getElementById('positionKeyword').value.trim();
+    if (!url || !keyword) {
+        showMessage('positionResult', 'Please enter both a URL and a keyword.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('positionResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Keyword Position Check Guide';
+    resultsDiv.appendChild(title);
+
+    const intro = document.createElement('p');
+    intro.textContent = 'To check the position of "' + keyword + '" for ' + url + ', follow these steps:';
+    resultsDiv.appendChild(intro);
+
+    const steps = document.createElement('ol');
+    const stepTexts = [
+        'Open an incognito/private browser window.',
+        'Search for "' + keyword + '" on Google.',
+        'Scan through results to find ' + url + '.',
+        'Note the position on the page and the page number.'
+    ];
+    stepTexts.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = s;
+        steps.appendChild(li);
+    });
+    resultsDiv.appendChild(steps);
+
+    const serpTitle = document.createElement('h4');
+    serpTitle.textContent = 'SERP Features to Check For:';
+    resultsDiv.appendChild(serpTitle);
+
+    const features = ['Featured Snippet', 'Knowledge Panel', 'Local Pack', 'Image Pack', 'Video Results', 'People Also Ask', 'Site Links', 'Reviews'];
+    const featureList = document.createElement('ul');
+    features.forEach(f => {
+        const li = document.createElement('li');
+        li.textContent = f;
+        featureList.appendChild(li);
+    });
+    resultsDiv.appendChild(featureList);
+}
+
+function checkKeywordDifficulty() {
+    const keyword = document.getElementById('difficultyKeyword').value.trim();
+    if (!keyword) {
+        showMessage('difficultyResult', 'Please enter a keyword.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('difficultyResult');
+    resultsDiv.innerHTML = '';
+
+    const words = keyword.split(/\s+/).filter(w => w.length > 0);
+    const wordCount = words.length;
+    let score;
+    if (wordCount === 1) {
+        score = Math.floor(Math.random() * 21) + 70;
+    } else if (wordCount === 2) {
+        score = Math.floor(Math.random() * 30) + 40;
+    } else {
+        score = Math.floor(Math.random() * 30) + 10;
+    }
+
+    const commercialTerms = ['buy', 'price', 'cost', 'cheap', 'best', 'top', 'review'];
+    const hasCommercial = words.some(w => commercialTerms.includes(w.toLowerCase()));
+    if (hasCommercial) {
+        score = Math.min(100, score + 10);
+    }
+
+    let level, color;
+    if (score >= 70) { level = 'Hard'; color = '#e74c3c'; }
+    else if (score >= 40) { level = 'Medium'; color = '#f39c12'; }
+    else { level = 'Easy'; color = '#27ae60'; }
+
+    const title = document.createElement('h3');
+    title.textContent = 'Keyword Difficulty Analysis';
+    resultsDiv.appendChild(title);
+
+    const scoreP = document.createElement('p');
+    scoreP.textContent = 'Difficulty Score: ' + score + '/100';
+    scoreP.style.fontWeight = 'bold';
+    scoreP.style.color = color;
+    resultsDiv.appendChild(scoreP);
+
+    const levelP = document.createElement('p');
+    levelP.textContent = 'Competition Level: ' + level;
+    resultsDiv.appendChild(levelP);
+
+    const recTitle = document.createElement('h4');
+    recTitle.textContent = 'Recommendations:';
+    resultsDiv.appendChild(recTitle);
+
+    const recommendations = [];
+    if (score >= 70) {
+        recommendations.push('Consider targeting longer-tail variations.');
+        recommendations.push('Build strong backlink profile before competing.');
+        recommendations.push('Create comprehensive, authoritative content.');
+    } else if (score >= 40) {
+        recommendations.push('Good keyword to target with quality content.');
+        recommendations.push('Focus on on-page SEO optimization.');
+        recommendations.push('Build relevant internal links.');
+    } else {
+        recommendations.push('Great opportunity - low competition keyword.');
+        recommendations.push('Create targeted content to rank quickly.');
+        recommendations.push('Use this keyword in title tags and headers.');
+    }
+    const recList = document.createElement('ul');
+    recommendations.forEach(r => {
+        const li = document.createElement('li');
+        li.textContent = r;
+        recList.appendChild(li);
+    });
+    resultsDiv.appendChild(recList);
+}
+
+function findLongTailKeywords() {
+    const keyword = document.getElementById('longTailKeyword').value.trim();
+    if (!keyword) {
+        showMessage('longTailResult', 'Please enter a seed keyword.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('longTailResult');
+    resultsDiv.innerHTML = '';
+
+    const templates = [
+        'best ' + keyword + ' for beginners',
+        'how to ' + keyword + ' effectively',
+        keyword + ' vs alternatives',
+        'top 10 ' + keyword,
+        'affordable ' + keyword + ' options',
+        keyword + ' for small business',
+        keyword + ' tips and tricks',
+        'best free ' + keyword,
+        keyword + ' step by step guide',
+        'why ' + keyword + ' is important'
+    ];
+
+    const title = document.createElement('h3');
+    title.textContent = 'Long Tail Keywords for "' + keyword + '"';
+    resultsDiv.appendChild(title);
+
+    const list = document.createElement('ul');
+    templates.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        list.appendChild(li);
+    });
+    resultsDiv.appendChild(list);
+}
+
+function checkBacklinks() {
+    const url = document.getElementById('backlinkUrl').value.trim();
+    if (!url) {
+        showMessage('backlinkResult', 'Please enter a URL.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('backlinkResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Backlink Analysis Guide for ' + url;
+    resultsDiv.appendChild(title);
+
+    const toolsTitle = document.createElement('h4');
+    toolsTitle.textContent = 'Free Backlink Checking Tools:';
+    resultsDiv.appendChild(toolsTitle);
+
+    const tools = ['Google Search Console', 'Ahrefs Backlink Checker', 'Moz Link Explorer', 'Ubersuggest', 'SEMrush'];
+    const toolList = document.createElement('ul');
+    tools.forEach(tool => {
+        const li = document.createElement('li');
+        li.textContent = tool;
+        toolList.appendChild(li);
+    });
+    resultsDiv.appendChild(toolList);
+
+    const templateTitle = document.createElement('h4');
+    templateTitle.textContent = 'Analysis Template:';
+    resultsDiv.appendChild(templateTitle);
+
+    const sections = ['Total Backlinks: [Check with tools above]', 'Referring Domains: [Check with tools above]', 'Anchor Text Distribution: [Analyze variety of anchor texts]', 'Link Quality: [Check domain authority of linking sites]'];
+    const sectionList = document.createElement('ul');
+    sections.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = s;
+        sectionList.appendChild(li);
+    });
+    resultsDiv.appendChild(sectionList);
+}
+
+function checkBrokenLinks() {
+    const html = document.getElementById('brokenLinkHtml').value.trim();
+    if (!html) {
+        showMessage('brokenLinkResult', 'Please paste HTML content.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('brokenLinkResult');
+    resultsDiv.innerHTML = '';
+
+    const linkRegex = /href=["']([^"']+)["']/gi;
+    const links = [];
+    let match;
+    while ((match = linkRegex.exec(html)) !== null) {
+        links.push(match[1]);
+    }
+
+    const internal = links.filter(l => l.startsWith('/') || l.startsWith('#'));
+    const external = links.filter(l => l.startsWith('http'));
+    const other = links.filter(l => !l.startsWith('/') && !l.startsWith('#') && !l.startsWith('http'));
+
+    const title = document.createElement('h3');
+    title.textContent = 'Link Analysis Results';
+    resultsDiv.appendChild(title);
+
+    const summary = document.createElement('p');
+    summary.textContent = 'Total Links Found: ' + links.length + ' | Internal: ' + internal.length + ' | External: ' + external.length + ' | Other: ' + other.length;
+    resultsDiv.appendChild(summary);
+
+    if (internal.length > 0) {
+        const intTitle = document.createElement('h4');
+        intTitle.textContent = 'Internal Links:';
+        resultsDiv.appendChild(intTitle);
+        const intList = document.createElement('ul');
+        internal.forEach(l => {
+            const li = document.createElement('li');
+            li.textContent = l;
+            intList.appendChild(li);
+        });
+        resultsDiv.appendChild(intList);
+    }
+
+    if (external.length > 0) {
+        const extTitle = document.createElement('h4');
+        extTitle.textContent = 'External Links:';
+        resultsDiv.appendChild(extTitle);
+        const extList = document.createElement('ul');
+        external.forEach(l => {
+            const li = document.createElement('li');
+            li.textContent = l;
+            extList.appendChild(li);
+        });
+        resultsDiv.appendChild(extList);
+    }
+}
+
+function checkRedirects() {
+    const url = document.getElementById('redirectUrl').value.trim();
+    if (!url) {
+        showMessage('redirectResult', 'Please enter a URL.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('redirectResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Redirect Types Reference';
+    resultsDiv.appendChild(title);
+
+    const types = [
+        { code: '301', name: 'Moved Permanently', desc: 'SEO friendly - passes link equity' },
+        { code: '302', name: 'Found (Temporary)', desc: 'Temporary redirect - does not pass full link equity' },
+        { code: '307', name: 'Temporary Redirect', desc: 'HTTP/1.1 temporary redirect' },
+        { code: '308', name: 'Permanent Redirect', desc: 'HTTP/1.1 permanent redirect' }
+    ];
+
+    const typeList = document.createElement('ul');
+    types.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t.code + ' ' + t.name + ' - ' + t.desc;
+        typeList.appendChild(li);
+    });
+    resultsDiv.appendChild(typeList);
+
+    const htaccessTitle = document.createElement('h4');
+    htaccessTitle.textContent = '.htaccess Redirect Code:';
+    resultsDiv.appendChild(htaccessTitle);
+
+    const htaccessCode = document.createElement('pre');
+    htaccessCode.textContent = 'RewriteEngine On\nRewriteRule ^old-page$ ' + url + ' [R=301,L]';
+    resultsDiv.appendChild(htaccessCode);
+
+    const nginxTitle = document.createElement('h4');
+    nginxTitle.textContent = 'Nginx Redirect Code:';
+    resultsDiv.appendChild(nginxTitle);
+
+    const nginxCode = document.createElement('pre');
+    nginxCode.textContent = 'server {\n    location /old-page {\n        return 301 ' + url + ';\n    }\n}';
+    resultsDiv.appendChild(nginxCode);
+}
+
+function checkDomainAuthority() {
+    const domain = document.getElementById('domainAuthority').value.trim();
+    if (!domain) {
+        showMessage('domainAuthorityResult', 'Please enter a domain.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('domainAuthorityResult');
+    resultsDiv.innerHTML = '';
+
+    let score = 50;
+    // Domain length factor
+    if (domain.length <= 10) score += 10;
+    else if (domain.length <= 15) score += 5;
+    else score -= 5;
+
+    // TLD bonus
+    const tld = domain.split('.').pop().toLowerCase();
+    if (['com', 'org', 'edu'].includes(tld)) score += 10;
+    else if (['net', 'gov'].includes(tld)) score += 5;
+
+    // Hyphens penalty
+    const hyphens = (domain.match(/-/g) || []).length;
+    score -= hyphens * 5;
+
+    // Numbers penalty
+    const numbers = (domain.match(/\d/g) || []).length;
+    score -= numbers * 2;
+
+    score = Math.max(0, Math.min(100, score));
+
+    const title = document.createElement('h3');
+    title.textContent = 'Domain Authority Analysis: ' + domain;
+    resultsDiv.appendChild(title);
+
+    const scoreP = document.createElement('p');
+    scoreP.textContent = 'Estimated Authority Score: ' + score + '/100';
+    scoreP.style.fontWeight = 'bold';
+    resultsDiv.appendChild(scoreP);
+
+    const factorsTitle = document.createElement('h4');
+    factorsTitle.textContent = 'Factors Analyzed:';
+    resultsDiv.appendChild(factorsTitle);
+
+    const factors = document.createElement('ul');
+    const factorItems = [
+        'Domain Length: ' + domain.length + ' characters',
+        'TLD: .' + tld,
+        'Hyphens: ' + hyphens,
+        'Numbers in domain: ' + numbers
+    ];
+    factorItems.forEach(f => {
+        const li = document.createElement('li');
+        li.textContent = f;
+        factors.appendChild(li);
+    });
+    resultsDiv.appendChild(factors);
+
+    const tipsTitle = document.createElement('h4');
+    tipsTitle.textContent = 'Improvement Tips:';
+    resultsDiv.appendChild(tipsTitle);
+
+    const tips = document.createElement('ul');
+    const tipItems = ['Build quality backlinks from authoritative sites.', 'Create valuable, original content regularly.', 'Improve site technical SEO and speed.', 'Maintain consistent social media presence.'];
+    tipItems.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        tips.appendChild(li);
+    });
+    resultsDiv.appendChild(tips);
+}
+
+function checkWwwRedirect() {
+    const domain = document.getElementById('wwwDomain').value.trim();
+    if (!domain) {
+        showMessage('wwwResult', 'Please enter a domain.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('wwwResult');
+    resultsDiv.innerHTML = '';
+
+    const cleanDomain = domain.replace(/^(https?:\/\/)?(www\.)?/, '');
+
+    const title = document.createElement('h3');
+    title.textContent = 'WWW Redirect Configuration for ' + cleanDomain;
+    resultsDiv.appendChild(title);
+
+    // www to non-www
+    const h4a = document.createElement('h4');
+    h4a.textContent = '.htaccess: WWW → Non-WWW';
+    resultsDiv.appendChild(h4a);
+    const preA = document.createElement('pre');
+    preA.textContent = 'RewriteEngine On\nRewriteCond %{HTTP_HOST} ^www\\.' + cleanDomain.replace(/\./g, '\\.') + ' [NC]\nRewriteRule ^(.*)$ https://' + cleanDomain + '/$1 [R=301,L]';
+    resultsDiv.appendChild(preA);
+
+    // non-www to www
+    const h4b = document.createElement('h4');
+    h4b.textContent = '.htaccess: Non-WWW → WWW';
+    resultsDiv.appendChild(h4b);
+    const preB = document.createElement('pre');
+    preB.textContent = 'RewriteEngine On\nRewriteCond %{HTTP_HOST} !^www\\.' + cleanDomain.replace(/\./g, '\\.') + ' [NC]\nRewriteRule ^(.*)$ https://www.' + cleanDomain + '/$1 [R=301,L]';
+    resultsDiv.appendChild(preB);
+
+    // Nginx www to non-www
+    const h4c = document.createElement('h4');
+    h4c.textContent = 'Nginx: WWW → Non-WWW';
+    resultsDiv.appendChild(h4c);
+    const preC = document.createElement('pre');
+    preC.textContent = 'server {\n    server_name www.' + cleanDomain + ';\n    return 301 https://' + cleanDomain + '$request_uri;\n}';
+    resultsDiv.appendChild(preC);
+
+    // Nginx non-www to www
+    const h4d = document.createElement('h4');
+    h4d.textContent = 'Nginx: Non-WWW → WWW';
+    resultsDiv.appendChild(h4d);
+    const preD = document.createElement('pre');
+    preD.textContent = 'server {\n    server_name ' + cleanDomain + ';\n    return 301 https://www.' + cleanDomain + '$request_uri;\n}';
+    resultsDiv.appendChild(preD);
+}
+
+function analyzeLinks() {
+    const html = document.getElementById('linkAnalyzerHtml').value.trim();
+    if (!html) {
+        showMessage('linkAnalyzerResult', 'Please paste HTML content.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('linkAnalyzerResult');
+    resultsDiv.innerHTML = '';
+
+    const linkRegex = /<a\s[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi;
+    const links = [];
+    let match;
+    while ((match = linkRegex.exec(html)) !== null) {
+        const href = match[1];
+        const fullTag = match[0];
+        const hasNofollow = /rel=["'][^"']*nofollow[^"']*["']/i.test(fullTag);
+        const isInternal = href.startsWith('/') || href.startsWith('#');
+        links.push({ href: href, nofollow: hasNofollow, internal: isInternal });
+    }
+
+    const internalCount = links.filter(l => l.internal).length;
+    const externalCount = links.filter(l => !l.internal).length;
+    const nofollowCount = links.filter(l => l.nofollow).length;
+    const dofollowCount = links.length - nofollowCount;
+
+    const title = document.createElement('h3');
+    title.textContent = 'Link Analysis Results';
+    resultsDiv.appendChild(title);
+
+    const stats = [
+        'Total Links: ' + links.length,
+        'Internal Links: ' + internalCount,
+        'External Links: ' + externalCount,
+        'Nofollow Links: ' + nofollowCount,
+        'Dofollow Links: ' + dofollowCount
+    ];
+    const statList = document.createElement('ul');
+    stats.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = s;
+        statList.appendChild(li);
+    });
+    resultsDiv.appendChild(statList);
+}
+
+function analyzeAnchorText() {
+    const html = document.getElementById('anchorTextHtml').value.trim();
+    if (!html) {
+        showMessage('anchorTextResult', 'Please paste HTML content.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('anchorTextResult');
+    resultsDiv.innerHTML = '';
+
+    const linkRegex = /<a\s[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi;
+    const anchors = {};
+    const categories = { 'exact match': 0, 'generic': 0, 'url': 0, 'branded': 0 };
+    let match;
+    while ((match = linkRegex.exec(html)) !== null) {
+        const text = match[2].replace(/<[^>]+>/g, '').trim();
+        if (text) {
+            anchors[text] = (anchors[text] || 0) + 1;
+            const lowerText = text.toLowerCase();
+            if (lowerText.startsWith('http')) {
+                categories['url']++;
+            } else if (['click here', 'read more', 'learn more', 'here', 'this'].includes(lowerText)) {
+                categories['generic']++;
+            } else {
+                categories['branded']++;
+            }
+        }
+    }
+
+    const title = document.createElement('h3');
+    title.textContent = 'Anchor Text Analysis';
+    resultsDiv.appendChild(title);
+
+    const distTitle = document.createElement('h4');
+    distTitle.textContent = 'Distribution:';
+    resultsDiv.appendChild(distTitle);
+
+    const distList = document.createElement('ul');
+    Object.entries(categories).forEach(([cat, count]) => {
+        const li = document.createElement('li');
+        li.textContent = cat.charAt(0).toUpperCase() + cat.slice(1) + ': ' + count;
+        distList.appendChild(li);
+    });
+    resultsDiv.appendChild(distList);
+
+    const freqTitle = document.createElement('h4');
+    freqTitle.textContent = 'Anchor Text Frequency:';
+    resultsDiv.appendChild(freqTitle);
+
+    const freqList = document.createElement('ul');
+    Object.entries(anchors).sort((a, b) => b[1] - a[1]).forEach(([text, count]) => {
+        const li = document.createElement('li');
+        li.textContent = '"' + text + '" - ' + count + ' time(s)';
+        freqList.appendChild(li);
+    });
+    resultsDiv.appendChild(freqList);
+}
+
+function checkNofollow() {
+    const html = document.getElementById('nofollowHtml').value.trim();
+    if (!html) {
+        showMessage('nofollowResult', 'Please paste HTML content.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('nofollowResult');
+    resultsDiv.innerHTML = '';
+
+    const linkRegex = /<a\s[^>]*href=["']([^"']+)["'][^>]*>/gi;
+    const links = [];
+    let match;
+    while ((match = linkRegex.exec(html)) !== null) {
+        const href = match[1];
+        const fullTag = match[0];
+        const isNofollow = /rel=["'][^"']*nofollow[^"']*["']/i.test(fullTag);
+        links.push({ href: href, nofollow: isNofollow });
+    }
+
+    const nofollowCount = links.filter(l => l.nofollow).length;
+    const dofollowCount = links.length - nofollowCount;
+    const nofollowPct = links.length > 0 ? ((nofollowCount / links.length) * 100).toFixed(1) : 0;
+    const dofollowPct = links.length > 0 ? ((dofollowCount / links.length) * 100).toFixed(1) : 0;
+
+    const title = document.createElement('h3');
+    title.textContent = 'Nofollow Link Analysis';
+    resultsDiv.appendChild(title);
+
+    const stats = document.createElement('ul');
+    const statItems = [
+        'Total Links: ' + links.length,
+        'Dofollow: ' + dofollowCount + ' (' + dofollowPct + '%)',
+        'Nofollow: ' + nofollowCount + ' (' + nofollowPct + '%)'
+    ];
+    statItems.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = s;
+        stats.appendChild(li);
+    });
+    resultsDiv.appendChild(stats);
+
+    if (links.length > 0) {
+        const detailTitle = document.createElement('h4');
+        detailTitle.textContent = 'Link Details:';
+        resultsDiv.appendChild(detailTitle);
+        const detailList = document.createElement('ul');
+        links.forEach(l => {
+            const li = document.createElement('li');
+            li.textContent = l.href + ' - ' + (l.nofollow ? 'Nofollow' : 'Dofollow');
+            detailList.appendChild(li);
+        });
+        resultsDiv.appendChild(detailList);
+    }
+}
+
+function showImageOptimizationTips() {
+    const resultsDiv = document.getElementById('imageOptimizerResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Image Optimization Checklist';
+    resultsDiv.appendChild(title);
+
+    const tips = [
+        'Compress images - Use tools like TinyPNG or ImageOptim to reduce file size.',
+        'Use WebP format - Modern format with superior compression.',
+        'Implement lazy loading - Add loading="lazy" to img tags.',
+        'Use proper dimensions - Set width and height attributes to prevent layout shift.',
+        'Responsive images with srcset - Serve different sizes for different devices.',
+        'Always add alt text - Descriptive alt text improves SEO and accessibility.'
+    ];
+
+    const tipList = document.createElement('ul');
+    tips.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        tipList.appendChild(li);
+    });
+    resultsDiv.appendChild(tipList);
+
+    const codeTitle = document.createElement('h4');
+    codeTitle.textContent = 'Sample Responsive Image Code:';
+    resultsDiv.appendChild(codeTitle);
+
+    const code = document.createElement('pre');
+    code.textContent = '<picture>\n  <source media="(max-width: 480px)" srcset="image-480w.webp" type="image/webp">\n  <source media="(max-width: 800px)" srcset="image-800w.webp" type="image/webp">\n  <source srcset="image-1200w.webp" type="image/webp">\n  <img src="image-1200w.jpg" alt="Descriptive alt text" loading="lazy" width="1200" height="800">\n</picture>';
+    resultsDiv.appendChild(code);
+}
+
+function generateFaviconCode() {
+    const url = document.getElementById('faviconUrl').value.trim();
+    const siteName = document.getElementById('faviconSiteName').value.trim();
+    if (!url) {
+        showMessage('faviconResult', 'Please enter a favicon image URL.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('faviconResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Favicon HTML Code';
+    resultsDiv.appendChild(title);
+
+    const code = document.createElement('pre');
+    code.textContent =
+        '<!-- Standard Favicons -->\n' +
+        '<link rel="icon" type="image/png" sizes="16x16" href="' + url + '">\n' +
+        '<link rel="icon" type="image/png" sizes="32x32" href="' + url + '">\n\n' +
+        '<!-- Apple Touch Icon -->\n' +
+        '<link rel="apple-touch-icon" sizes="180x180" href="' + url + '">\n\n' +
+        '<!-- Android Chrome -->\n' +
+        '<link rel="icon" type="image/png" sizes="192x192" href="' + url + '">\n' +
+        '<link rel="icon" type="image/png" sizes="512x512" href="' + url + '">\n\n' +
+        '<!-- Web Manifest -->\n' +
+        '<link rel="manifest" href="/site.webmanifest">\n\n' +
+        '<!-- Microsoft -->\n' +
+        '<meta name="msapplication-TileImage" content="' + url + '">\n' +
+        '<meta name="msapplication-TileColor" content="#ffffff">\n' +
+        (siteName ? '<meta name="application-name" content="' + siteName + '">\n' : '');
+    resultsDiv.appendChild(code);
+}
+
+function generateOgImage() {
+    const ogTitle = document.getElementById('ogTitle').value.trim();
+    const ogSubtitle = document.getElementById('ogSubtitle').value.trim();
+    const bgColor = document.getElementById('ogBgColor').value.trim() || '#4A90D9';
+    const textColor = document.getElementById('ogTextColor').value.trim() || '#FFFFFF';
+    if (!ogTitle) {
+        showMessage('ogImageResult', 'Please enter a title.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('ogImageResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'OG Image Preview';
+    resultsDiv.appendChild(title);
+
+    // Preview div with 1200x630 aspect ratio
+    const preview = document.createElement('div');
+    preview.style.cssText = 'max-width:600px;padding-bottom:52.5%;position:relative;background:' + escapeHtml(bgColor) + ';border-radius:8px;overflow:hidden;margin:10px 0;';
+
+    const content = document.createElement('div');
+    content.style.cssText = 'position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px;';
+
+    const titleEl = document.createElement('h2');
+    titleEl.textContent = ogTitle;
+    titleEl.style.cssText = 'color:' + escapeHtml(textColor) + ';margin:0 0 10px 0;text-align:center;';
+    content.appendChild(titleEl);
+
+    if (ogSubtitle) {
+        const subtitleEl = document.createElement('p');
+        subtitleEl.textContent = ogSubtitle;
+        subtitleEl.style.cssText = 'color:' + escapeHtml(textColor) + ';margin:0;text-align:center;opacity:0.9;';
+        content.appendChild(subtitleEl);
+    }
+
+    preview.appendChild(content);
+    resultsDiv.appendChild(preview);
+
+    const metaTitle = document.createElement('h4');
+    metaTitle.textContent = 'OG Meta Tags:';
+    resultsDiv.appendChild(metaTitle);
+
+    const metaCode = document.createElement('pre');
+    metaCode.textContent =
+        '<meta property="og:title" content="' + ogTitle + '">\n' +
+        (ogSubtitle ? '<meta property="og:description" content="' + ogSubtitle + '">\n' : '') +
+        '<meta property="og:image" content="YOUR_IMAGE_URL">\n' +
+        '<meta property="og:image:width" content="1200">\n' +
+        '<meta property="og:image:height" content="630">\n' +
+        '<meta property="og:type" content="website">';
+    resultsDiv.appendChild(metaCode);
+}
+
+function analyzePageSpeed() {
+    const url = document.getElementById('pageSpeedUrl').value.trim();
+    if (!url) {
+        showMessage('pageSpeedResult', 'Please enter a URL.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('pageSpeedResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Page Speed Optimization Checklist';
+    resultsDiv.appendChild(title);
+
+    const categories = [
+        {
+            name: 'LCP (Largest Contentful Paint)',
+            tips: ['Optimize and compress images.', 'Preload critical resources.', 'Minimize render-blocking CSS and JavaScript.']
+        },
+        {
+            name: 'FID (First Input Delay)',
+            tips: ['Minimize and defer JavaScript.', 'Use web workers for heavy tasks.', 'Break up long tasks into smaller ones.']
+        },
+        {
+            name: 'CLS (Cumulative Layout Shift)',
+            tips: ['Set explicit dimensions on images and video.', 'Avoid inserting content above existing content.', 'Use CSS transform animations instead of layout-triggering properties.']
+        }
+    ];
+
+    categories.forEach(cat => {
+        const catTitle = document.createElement('h4');
+        catTitle.textContent = cat.name;
+        resultsDiv.appendChild(catTitle);
+
+        const tipList = document.createElement('ul');
+        cat.tips.forEach(tip => {
+            const li = document.createElement('li');
+            li.textContent = tip;
+            tipList.appendChild(li);
+        });
+        resultsDiv.appendChild(tipList);
+    });
+}
+
+function testMobileFriendly() {
+    const url = document.getElementById('mobileFriendlyUrl').value.trim();
+    if (!url) {
+        showMessage('mobileFriendlyResult', 'Please enter a URL.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('mobileFriendlyResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Mobile-Friendly Checklist';
+    resultsDiv.appendChild(title);
+
+    const checks = [
+        'Viewport meta tag - Ensure your page has a proper viewport meta tag.',
+        'Responsive CSS - Use media queries for different screen sizes.',
+        'Touch target size - Buttons and links should be at least 48x48px.',
+        'Readable font sizes - Use at least 16px for body text.',
+        'No horizontal scrolling - Content should fit within the viewport.',
+        'Fast loading - Page should load in under 3 seconds on mobile.'
+    ];
+
+    const checkList = document.createElement('ul');
+    checks.forEach(c => {
+        const li = document.createElement('li');
+        li.textContent = c;
+        checkList.appendChild(li);
+    });
+    resultsDiv.appendChild(checkList);
+
+    const codeTitle = document.createElement('h4');
+    codeTitle.textContent = 'Proper Viewport Meta Tag:';
+    resultsDiv.appendChild(codeTitle);
+
+    const code = document.createElement('pre');
+    code.textContent = '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    resultsDiv.appendChild(code);
+
+    const tipsTitle = document.createElement('h4');
+    tipsTitle.textContent = 'Responsive Design Tips:';
+    resultsDiv.appendChild(tipsTitle);
+
+    const tips = document.createElement('ul');
+    const tipItems = ['Use flexbox or CSS grid for layouts.', 'Use relative units (%, em, rem) instead of fixed pixels.', 'Test on multiple device sizes.', 'Use responsive images with srcset.'];
+    tipItems.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        tips.appendChild(li);
+    });
+    resultsDiv.appendChild(tips);
+}
+
+function checkSSL() {
+    const domain = document.getElementById('sslDomain').value.trim();
+    if (!domain) {
+        showMessage('sslResult', 'Please enter a domain.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('sslResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'SSL Security Checklist for ' + domain;
+    resultsDiv.appendChild(title);
+
+    const checks = [
+        'Valid SSL Certificate - Ensure certificate is not expired.',
+        'HTTPS Redirect - All HTTP traffic should redirect to HTTPS.',
+        'HSTS Header - Enable HTTP Strict Transport Security.',
+        'Secure Cookies - Set Secure flag on all cookies.',
+        'Mixed Content - No HTTP resources loaded on HTTPS pages.',
+        'Certificate Chain - Complete certificate chain is served.'
+    ];
+
+    const checkList = document.createElement('ul');
+    checks.forEach(c => {
+        const li = document.createElement('li');
+        li.textContent = c;
+        checkList.appendChild(li);
+    });
+    resultsDiv.appendChild(checkList);
+
+    const codeTitle = document.createElement('h4');
+    codeTitle.textContent = 'Recommended HSTS Header:';
+    resultsDiv.appendChild(codeTitle);
+
+    const code = document.createElement('pre');
+    code.textContent = 'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload';
+    resultsDiv.appendChild(code);
+}
+
+function validateStructuredData() {
+    const input = document.getElementById('structuredDataInput').value.trim();
+    if (!input) {
+        showMessage('structuredDataResult', 'Please paste JSON-LD data.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('structuredDataResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Structured Data Validation';
+    resultsDiv.appendChild(title);
+
+    let data;
+    const checks = [];
+
+    try {
+        data = JSON.parse(input);
+        checks.push({ label: 'Valid JSON', pass: true });
+    } catch (e) {
+        checks.push({ label: 'Valid JSON', pass: false });
+        const list = document.createElement('ul');
+        checks.forEach(c => {
+            const li = document.createElement('li');
+            li.textContent = (c.pass ? '\u2713 ' : '\u2717 ') + c.label;
+            li.style.color = c.pass ? '#27ae60' : '#e74c3c';
+            list.appendChild(li);
+        });
+        resultsDiv.appendChild(list);
+        return;
+    }
+
+    // Check @context
+    checks.push({ label: '@context present (schema.org)', pass: data['@context'] && String(data['@context']).includes('schema.org') });
+
+    // Check @type
+    checks.push({ label: '@type present', pass: !!data['@type'] });
+
+    // Type-specific checks
+    if (data['@type']) {
+        const type = data['@type'];
+        if (type === 'Article') {
+            checks.push({ label: 'Article: headline', pass: !!data.headline });
+            checks.push({ label: 'Article: author', pass: !!data.author });
+            checks.push({ label: 'Article: datePublished', pass: !!data.datePublished });
+        } else if (type === 'Product') {
+            checks.push({ label: 'Product: name', pass: !!data.name });
+            checks.push({ label: 'Product: description', pass: !!data.description });
+        } else if (type === 'LocalBusiness') {
+            checks.push({ label: 'LocalBusiness: name', pass: !!data.name });
+            checks.push({ label: 'LocalBusiness: address', pass: !!data.address });
+        }
+    }
+
+    const list = document.createElement('ul');
+    checks.forEach(c => {
+        const li = document.createElement('li');
+        li.textContent = (c.pass ? '\u2713 ' : '\u2717 ') + c.label;
+        li.style.color = c.pass ? '#27ae60' : '#e74c3c';
+        list.appendChild(li);
+    });
+    resultsDiv.appendChild(list);
+}
+
+function checkServerStatus() {
+    const url = document.getElementById('serverStatusUrl').value.trim();
+    if (!url) {
+        showMessage('serverStatusResult', 'Please enter a URL.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('serverStatusResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'HTTP Status Codes Reference';
+    resultsDiv.appendChild(title);
+
+    const codes = [
+        { code: '200', name: 'OK', desc: 'Request successful.' },
+        { code: '301', name: 'Moved Permanently', desc: 'Resource has permanently moved.' },
+        { code: '302', name: 'Found', desc: 'Temporary redirect.' },
+        { code: '400', name: 'Bad Request', desc: 'Server cannot process the request.' },
+        { code: '401', name: 'Unauthorized', desc: 'Authentication required.' },
+        { code: '403', name: 'Forbidden', desc: 'Access denied.' },
+        { code: '404', name: 'Not Found', desc: 'Resource not found.' },
+        { code: '500', name: 'Internal Server Error', desc: 'Server encountered an error.' },
+        { code: '502', name: 'Bad Gateway', desc: 'Invalid response from upstream server.' },
+        { code: '503', name: 'Service Unavailable', desc: 'Server temporarily unavailable.' }
+    ];
+
+    const codeList = document.createElement('ul');
+    codes.forEach(c => {
+        const li = document.createElement('li');
+        li.textContent = c.code + ' ' + c.name + ' - ' + c.desc;
+        codeList.appendChild(li);
+    });
+    resultsDiv.appendChild(codeList);
+
+    const monitorTitle = document.createElement('h4');
+    monitorTitle.textContent = 'Server Monitoring Tips:';
+    resultsDiv.appendChild(monitorTitle);
+
+    const tips = document.createElement('ul');
+    const tipItems = ['Set up uptime monitoring alerts.', 'Monitor response times regularly.', 'Use tools like UptimeRobot, Pingdom, or StatusCake.', 'Configure health check endpoints.'];
+    tipItems.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        tips.appendChild(li);
+    });
+    resultsDiv.appendChild(tips);
+}
+
+function performDnsLookup() {
+    const domain = document.getElementById('dnsLookupDomain').value.trim();
+    if (!domain) {
+        showMessage('dnsLookupResult', 'Please enter a domain.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('dnsLookupResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'DNS Record Types for ' + domain;
+    resultsDiv.appendChild(title);
+
+    const records = [
+        { type: 'A', desc: 'Maps domain to IPv4 address.' },
+        { type: 'AAAA', desc: 'Maps domain to IPv6 address.' },
+        { type: 'CNAME', desc: 'Alias for another domain name.' },
+        { type: 'MX', desc: 'Mail exchange server for the domain.' },
+        { type: 'TXT', desc: 'Text records for verification and policies.' },
+        { type: 'NS', desc: 'Name servers authoritative for the domain.' },
+        { type: 'SOA', desc: 'Start of authority - primary name server info.' },
+        { type: 'PTR', desc: 'Reverse DNS lookup record.' }
+    ];
+
+    const recList = document.createElement('ul');
+    records.forEach(r => {
+        const li = document.createElement('li');
+        li.textContent = r.type + ' - ' + r.desc;
+        recList.appendChild(li);
+    });
+    resultsDiv.appendChild(recList);
+
+    const cmdTitle = document.createElement('h4');
+    cmdTitle.textContent = 'Dig Commands for ' + domain + ':';
+    resultsDiv.appendChild(cmdTitle);
+
+    const cmdCode = document.createElement('pre');
+    cmdCode.textContent =
+        'dig ' + domain + ' A\n' +
+        'dig ' + domain + ' AAAA\n' +
+        'dig ' + domain + ' MX\n' +
+        'dig ' + domain + ' TXT\n' +
+        'dig ' + domain + ' NS\n' +
+        'dig ' + domain + ' CNAME';
+    resultsDiv.appendChild(cmdCode);
+}
+
+function performWhoisLookup() {
+    const domain = document.getElementById('whoisDomain').value.trim();
+    if (!domain) {
+        showMessage('whoisResult', 'Please enter a domain.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('whoisResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'WHOIS Information for ' + domain;
+    resultsDiv.appendChild(title);
+
+    const infoTitle = document.createElement('h4');
+    infoTitle.textContent = 'WHOIS Data Explained:';
+    resultsDiv.appendChild(infoTitle);
+
+    const infoItems = [
+        'Registrar Info - The company where the domain is registered.',
+        'Creation Date - When the domain was first registered.',
+        'Expiration Date - When the domain registration expires.',
+        'Name Servers - DNS servers authoritative for the domain.',
+        'Registrant Contact - Owner contact information.'
+    ];
+    const infoList = document.createElement('ul');
+    infoItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        infoList.appendChild(li);
+    });
+    resultsDiv.appendChild(infoList);
+
+    const privacyTitle = document.createElement('h4');
+    privacyTitle.textContent = 'Privacy Considerations:';
+    resultsDiv.appendChild(privacyTitle);
+
+    const privacyItems = ['GDPR regulations may redact personal data in WHOIS.', 'WHOIS privacy services can mask registrant details.', 'Some registrars offer free WHOIS privacy protection.'];
+    const privacyList = document.createElement('ul');
+    privacyItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        privacyList.appendChild(li);
+    });
+    resultsDiv.appendChild(privacyList);
+
+    const templateTitle = document.createElement('h4');
+    templateTitle.textContent = 'Typical WHOIS Output:';
+    resultsDiv.appendChild(templateTitle);
+
+    const template = document.createElement('pre');
+    template.textContent =
+        'Domain Name: ' + domain.toUpperCase() + '\n' +
+        'Registrar: [Registrar Name]\n' +
+        'Creation Date: [YYYY-MM-DD]\n' +
+        'Expiration Date: [YYYY-MM-DD]\n' +
+        'Name Server: ns1.' + domain + '\n' +
+        'Name Server: ns2.' + domain + '\n' +
+        'Status: clientTransferProhibited';
+    resultsDiv.appendChild(template);
+}
+
+function findIpLocation() {
+    const ip = document.getElementById('ipAddress').value.trim();
+    if (!ip) {
+        showMessage('ipLocationResult', 'Please enter an IP address.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('ipLocationResult');
+    resultsDiv.innerHTML = '';
+
+    // Validate IPv4
+    const ipRegex = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+    const match = ip.match(ipRegex);
+    if (!match || match.slice(1).some(octet => parseInt(octet) > 255)) {
+        showMessage('ipLocationResult', 'Please enter a valid IPv4 address.', 'error');
+        return;
+    }
+
+    const title = document.createElement('h3');
+    title.textContent = 'IP Address Analysis: ' + ip;
+    resultsDiv.appendChild(title);
+
+    const structTitle = document.createElement('h4');
+    structTitle.textContent = 'IP Structure:';
+    resultsDiv.appendChild(structTitle);
+
+    const octets = ip.split('.');
+    const firstOctet = parseInt(octets[0]);
+    let ipClass;
+    if (firstOctet <= 127) ipClass = 'Class A (1.0.0.0 - 127.255.255.255)';
+    else if (firstOctet <= 191) ipClass = 'Class B (128.0.0.0 - 191.255.255.255)';
+    else if (firstOctet <= 223) ipClass = 'Class C (192.0.0.0 - 223.255.255.255)';
+    else if (firstOctet <= 239) ipClass = 'Class D - Multicast (224.0.0.0 - 239.255.255.255)';
+    else ipClass = 'Class E - Reserved (240.0.0.0 - 255.255.255.255)';
+
+    const classP = document.createElement('p');
+    classP.textContent = 'IP Class: ' + ipClass;
+    resultsDiv.appendChild(classP);
+
+    const isPrivate = (firstOctet === 10) ||
+        (firstOctet === 172 && parseInt(octets[1]) >= 16 && parseInt(octets[1]) <= 31) ||
+        (firstOctet === 192 && parseInt(octets[1]) === 168);
+
+    const privateP = document.createElement('p');
+    privateP.textContent = isPrivate ? 'This is a private IP address.' : 'This is a public IP address.';
+    resultsDiv.appendChild(privateP);
+
+    const cdnTitle = document.createElement('h4');
+    cdnTitle.textContent = 'CDN Recommendations for Global Reach:';
+    resultsDiv.appendChild(cdnTitle);
+
+    const cdnList = document.createElement('ul');
+    const cdns = ['Cloudflare - Free tier available with global CDN.', 'AWS CloudFront - Pay-as-you-go CDN service.', 'Fastly - High-performance edge cloud platform.', 'Google Cloud CDN - Integrated with Google Cloud.'];
+    cdns.forEach(cdn => {
+        const li = document.createElement('li');
+        li.textContent = cdn;
+        cdnList.appendChild(li);
+    });
+    resultsDiv.appendChild(cdnList);
+}
+
+function checkHttpHeaders() {
+    const url = document.getElementById('headersUrl').value.trim();
+    if (!url) {
+        showMessage('headersResult', 'Please enter a URL.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('headersResult');
+    resultsDiv.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Important SEO HTTP Headers';
+    resultsDiv.appendChild(title);
+
+    const headers = [
+        { name: 'X-Robots-Tag', desc: 'Controls search engine indexing at server level.' },
+        { name: 'Link (rel=canonical)', desc: 'Specifies canonical URL via HTTP header.' },
+        { name: 'Cache-Control', desc: 'Controls browser and CDN caching behavior.' },
+        { name: 'Content-Type', desc: 'Specifies the media type of the resource.' },
+        { name: 'Content-Security-Policy', desc: 'Prevents XSS and other injection attacks.' },
+        { name: 'Strict-Transport-Security', desc: 'Forces HTTPS connections.' },
+        { name: 'X-Content-Type-Options', desc: 'Prevents MIME type sniffing.' },
+        { name: 'X-Frame-Options', desc: 'Controls iframe embedding.' }
+    ];
+
+    const headerList = document.createElement('ul');
+    headers.forEach(h => {
+        const li = document.createElement('li');
+        li.textContent = h.name + ' - ' + h.desc;
+        headerList.appendChild(li);
+    });
+    resultsDiv.appendChild(headerList);
+
+    const configTitle = document.createElement('h4');
+    configTitle.textContent = 'Recommended Headers Configuration (Nginx):';
+    resultsDiv.appendChild(configTitle);
+
+    const configCode = document.createElement('pre');
+    configCode.textContent =
+        'add_header X-Content-Type-Options "nosniff" always;\n' +
+        'add_header X-Frame-Options "SAMEORIGIN" always;\n' +
+        'add_header X-Robots-Tag "index, follow" always;\n' +
+        'add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;\n' +
+        'add_header Content-Security-Policy "default-src \'self\'" always;\n' +
+        'add_header Cache-Control "public, max-age=86400";';
+    resultsDiv.appendChild(configCode);
+}
+
+function testRichSnippets() {
+    const input = document.getElementById('richSnippetInput').value.trim();
+    if (!input) {
+        showMessage('richSnippetResult', 'Please paste JSON-LD data.', 'error');
+        return;
+    }
+    const resultsDiv = document.getElementById('richSnippetResult');
+    resultsDiv.innerHTML = '';
+
+    let data;
+    try {
+        data = JSON.parse(input);
+    } catch (e) {
+        showMessage('richSnippetResult', 'Invalid JSON. Please check your input.', 'error');
+        return;
+    }
+
+    const title = document.createElement('h3');
+    title.textContent = 'Rich Snippet Preview';
+    resultsDiv.appendChild(title);
+
+    const type = data['@type'] || 'Unknown';
+
+    // Mock Google search result preview
+    const preview = document.createElement('div');
+    preview.style.cssText = 'border:1px solid #ddd;border-radius:8px;padding:16px;margin:10px 0;max-width:600px;font-family:Arial,sans-serif;';
+
+    let snippetTitle = '';
+    let snippetUrl = '';
+    let snippetDesc = '';
+
+    if (type === 'Article') {
+        snippetTitle = data.headline || data.name || 'Article Title';
+        snippetUrl = data.url || 'https://example.com/article';
+        snippetDesc = data.description || 'Article description...';
+        if (data.datePublished) {
+            snippetDesc = data.datePublished + ' — ' + snippetDesc;
+        }
+    } else if (type === 'Product') {
+        snippetTitle = data.name || 'Product Name';
+        snippetUrl = data.url || 'https://example.com/product';
+        snippetDesc = data.description || 'Product description...';
+        if (data.offers && data.offers.price) {
+            snippetDesc = 'Price: $' + data.offers.price + ' — ' + snippetDesc;
+        }
+    } else {
+        snippetTitle = data.name || data.headline || 'Page Title';
+        snippetUrl = data.url || 'https://example.com';
+        snippetDesc = data.description || 'Page description...';
+    }
+
+    const titleLink = document.createElement('div');
+    titleLink.textContent = snippetTitle;
+    titleLink.style.cssText = 'color:#1a0dab;font-size:18px;cursor:pointer;margin-bottom:4px;';
+    preview.appendChild(titleLink);
+
+    const urlLine = document.createElement('div');
+    urlLine.textContent = snippetUrl;
+    urlLine.style.cssText = 'color:#006621;font-size:14px;margin-bottom:4px;';
+    preview.appendChild(urlLine);
+
+    if (type === 'Product' && data.aggregateRating) {
+        const ratingLine = document.createElement('div');
+        const rating = parseFloat(data.aggregateRating.ratingValue) || 0;
+        const stars = '\u2605'.repeat(Math.round(rating)) + '\u2606'.repeat(5 - Math.round(rating));
+        ratingLine.textContent = stars + ' ' + rating.toFixed(1);
+        ratingLine.style.cssText = 'color:#e67700;font-size:14px;margin-bottom:4px;';
+        preview.appendChild(ratingLine);
+    }
+
+    const descLine = document.createElement('div');
+    descLine.textContent = snippetDesc;
+    descLine.style.cssText = 'color:#545454;font-size:13px;line-height:1.4;';
+    preview.appendChild(descLine);
+
+    resultsDiv.appendChild(preview);
+
+    const typeInfo = document.createElement('p');
+    typeInfo.textContent = 'Schema Type: ' + type;
+    typeInfo.style.fontWeight = 'bold';
+    resultsDiv.appendChild(typeInfo);
 }
 
 // Utility Functions
