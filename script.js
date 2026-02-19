@@ -529,9 +529,12 @@ function encodeHTML() {
 
 function decodeHTML() {
     const input = document.getElementById('htmlInput').value;
-    const textarea = document.createElement('textarea');
-    textarea.innerHTML = input;
-    const decoded = textarea.value;
+    const decoded = input
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'");
     document.getElementById('htmlResult').innerHTML = `<pre>${decoded}</pre>`;
 }
 
@@ -539,7 +542,11 @@ function decodeHTML() {
 function encodeBase64() {
     const input = document.getElementById('base64Input').value;
     try {
-        const encoded = btoa(unescape(encodeURIComponent(input)));
+        // Use TextEncoder for proper UTF-8 encoding
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input);
+        const binary = String.fromCharCode(...data);
+        const encoded = btoa(binary);
         document.getElementById('base64Result').innerHTML = `<pre>${encoded}</pre>`;
     } catch (e) {
         showMessage('base64Result', 'Error encoding to Base64', 'error');
@@ -549,7 +556,14 @@ function encodeBase64() {
 function decodeBase64() {
     const input = document.getElementById('base64Input').value;
     try {
-        const decoded = decodeURIComponent(escape(atob(input)));
+        // Use TextDecoder for proper UTF-8 decoding
+        const binary = atob(input);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        const decoder = new TextDecoder();
+        const decoded = decoder.decode(bytes);
         document.getElementById('base64Result').innerHTML = `<pre>${decoded}</pre>`;
     } catch (e) {
         showMessage('base64Result', 'Error decoding from Base64', 'error');
