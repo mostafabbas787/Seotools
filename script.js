@@ -380,19 +380,37 @@ function analyzeKeywordDensity() {
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10);
     
-    let html = '<h3>Top 10 Keywords:</h3><div class="stats-grid">';
+    // Create elements safely
+    const resultsDiv = document.getElementById('keywordResults');
+    resultsDiv.innerHTML = '';
+    
+    const heading = document.createElement('h3');
+    heading.textContent = 'Top 10 Keywords:';
+    resultsDiv.appendChild(heading);
+    
+    const statsGrid = document.createElement('div');
+    statsGrid.className = 'stats-grid';
+    
     sorted.forEach(([word, count]) => {
         const density = ((count / totalWords) * 100).toFixed(2);
-        html += `
-            <div class="stat-item">
-                <div class="stat-value">${density}%</div>
-                <div class="stat-label">${word} (${count})</div>
-            </div>
-        `;
+        
+        const statItem = document.createElement('div');
+        statItem.className = 'stat-item';
+        
+        const statValue = document.createElement('div');
+        statValue.className = 'stat-value';
+        statValue.textContent = `${density}%`;
+        
+        const statLabel = document.createElement('div');
+        statLabel.className = 'stat-label';
+        statLabel.textContent = `${word} (${count})`;
+        
+        statItem.appendChild(statValue);
+        statItem.appendChild(statLabel);
+        statsGrid.appendChild(statItem);
     });
-    html += '</div>';
     
-    document.getElementById('keywordResults').innerHTML = html;
+    resultsDiv.appendChild(statsGrid);
 }
 
 // Meta Tags Generator
