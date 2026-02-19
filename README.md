@@ -1,6 +1,6 @@
 # SEO Tools Hub
 
-A comprehensive collection of **50+ free online SEO tools** built with vanilla HTML, CSS, and JavaScript. Analyze, optimize, and boost your website's search engine performance — all from a single, fast, client-side application.
+A comprehensive collection of **50+ SEO tools** (27 fully active, more coming soon) built with vanilla HTML, CSS, and JavaScript. Analyze, optimize, and boost your website's search engine performance — all from a single, fast, client-side application.
 
 ## ✨ Features
 
